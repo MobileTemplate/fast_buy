@@ -1,0 +1,14 @@
+<template name="07a20e10">
+  <view class="_view data-v-7fbc4e07 index">
+    <swiper bindchange="handleProxy" data-eventid="{{'ip0-1'}}" data-comkey="{{$k}}" class="_swiper data-v-7fbc4e07" style=" {{('height:' + (screenHeight + 'px') + ';')}}">
+      <swiper-item wx:key="index" key="{{index}}" bindtap="handleProxy" data-eventid="{{'IdY-0-'+index}}" data-comkey="{{$k}}" wx:for="{{data}}" wx:for-index="index" wx:for-item="value" class="_swiper-item data-v-7fbc4e07">
+        <image src="{{value}}" mode="widthFix" class="_image data-v-7fbc4e07"></image>
+      </swiper-item>
+    </swiper>
+    <view class="_view data-v-7fbc4e07 detail-btn-view">
+      <view class="_view data-v-7fbc4e07 download" bindtap="handleProxy" data-eventid="{{'5iX-2'}}" data-comkey="{{$k}}"></view>
+      <view wx:if="{{showBtn}}" class="_view data-v-7fbc4e07 setting" bindtap="handleProxy" data-eventid="{{'K3X-3'}}" data-comkey="{{$k}}">设为壁纸</view>
+      <view class="_view data-v-7fbc4e07 collect" bindtap="handleProxy" data-eventid="{{'utP-4'}}" data-comkey="{{$k}}"></view>
+    </view>
+  </view>
+</template>

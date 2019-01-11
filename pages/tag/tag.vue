@@ -1,14 +1,58 @@
 <template>
-	<view class="index">
+	<view class="tag_index">
+		<swiper style="width: 100%;" :indicator-dots="true" :autoplay="true" :interval="interval" 
+		:duration="duration" :circular="true">
+			<swiper-item v-for="(item, i) in lb_data" :key="i">
+				<image style="width: 100%; height:100%;" class="lb-img" :src="item.img"></image>
+			</swiper-item>
+		</swiper>
 		<view class="tags">
 			<block v-for="(value, index) in data" :key="index">
-				<view class="tag" @tap="goList(value)">
-					<image class="tag-img" :src="value.icon"></image>
-					<text class="tag-text">{{value.type}}</text>
+				<view class="tag-oneview" @tap="goList(value)" :style="{flexBasis:100/4 + '%'}">
+					<view class="tag">
+						<image class="tag-img" :src="value.icon"></image>
+						<text class="tag-text">{{value.type}}</text>
+					</view>
 				</view>
 			</block>
 		</view>
-</uni-grid>
+		<view style="flex:1; height: 6upx; width: 100%; background-color: #EFEFEF;"/>
+		<view style="flex:1; width: 100%; background-color: #FFFFFF;">
+			<view class="tag-input-view">
+				<view class="tag-label-view">
+					<text class="tag-label">商城头条</text>
+				</view>
+				<swiper style="width: 100%; height: 60upx;" :indicator-dots="false" :vertical="true"
+				 :autoplay="true" :interval="interval" :duration="duration" :circular="true">
+					<swiper-item v-for="(item, i) in lb_data_text" :key="i">
+						<text class="tag-label" style="color: #000000; font-size: 28upx;">{{item}}</text>
+					</swiper-item>
+				</swiper>
+			</view>
+		</view>
+		<view style="flex:1; height: 6upx; width: 100%; background-color: #EFEFEF;"/>
+		<view class="tags" style="background-color: #EFEFEF;">
+			<view class="tag-oneview" style="width: 100%; height: 300upx; background-color: #FFFFFF;">
+					
+			</view>
+			<view style=" height: 6upx; width: 100%; background-color: #EFEFEF;"/>
+			<view class="tag-oneview" style="width: 49.7%; height: 300upx; background-color: #FFFFFF;">
+					
+			</view>
+			
+			<view class="tag-oneview" style="width: 49.7%; margin-left: 0.6%; height: 300upx; background-color: #FFFFFF;">
+					
+			</view>
+			<view style="height: 6upx; width: 100%; background-color: #EFEFEF;"/>
+			<view class="tag-oneview" style="width: 49.7%; height: 300upx; background-color: #FFFFFF;">
+					
+			</view>
+			
+			<view class="tag-oneview" style="width: 49.7%; margin-left: 0.6%; height: 300upx; background-color: #FFFFFF;">
+					
+			</view>
+			
+		</view>
 	</view>
 </template>
 
@@ -18,45 +62,43 @@
 			return {
 				data: [
 					{
-						type: '动物',
+						type: '分类',
 						id: 1,
-						icon: 'http://placehold.it/150x150'
+						icon: '../../static/home/grid_1.jpg'
 					},
 					{
-						type: '风景',
+						type: '优惠',
 						id: 2,
-						icon: 'http://placehold.it/150x150'
+						icon: '../../static/home/grid_2.jpg'
 					},
 					{
-						type: '建筑',
+						type: '个人',
 						id: 3,
-						icon: 'http://placehold.it/150x150'
+						icon: '../../static/home/grid_3.jpg'
 					},
 					{
-						type: '美女',
+						type: '理财',
 						id: 4,
-						icon: 'http://placehold.it/150x150'
-					},
-					{
-						type: '汽车',
-						id: 5,
-						icon: 'http://placehold.it/150x150'
-					},
-					{
-						type: '运动',
-						id: 6,
-						icon: 'http://placehold.it/150x150'
-					},
-					{
-						type: '动物',
-						id: 1,
-						icon: 'http://placehold.it/150x150'
-					},
-					{
-						type: '风景',
-						id: 2,
-						icon: 'http://placehold.it/150x150'
+						icon: '../../static/home/grid_4.jpg'
 					}
+				],
+				lb_data: [
+					{
+						img: "../../static/home/shuffling_1.jpg"
+					},
+					{
+						img: "../../static/home/shuffling_2.jpg"
+					},
+					{
+						img: "../../static/home/shuffling_3.jpg"
+					}
+				],
+				interval: 5000,
+				duration: 1000,
+				lb_data_text: [
+					"[特惠]洋河年末大促，低至两件五折",
+					"[公告]华北、华中部分地区配送延迟",
+					"[特惠]家电狂欢千亿礼券 买1送1！"
 				]
 			}
 		},
@@ -65,11 +107,47 @@
 				uni.navigateTo({
 					url:'../list/list?type=' + value.type + '&id=' + value.id
 				})
+			},
+			canvasIdErrorCallback: function (e) {
+			    console.error(e.detail.errMsg)
 			}
 		}
 	}
 </script>
 
 <style>
+	scroll-view {
+		display:-webkit-box;
+		display:-webkit-flex;
+		display:flex;
+	}
+	.tag_index {
+		flex: 1;
+		width:100%;
+		min-height:100vh;
+		flex-direction: column;
+	}
 	
+	.tag-input-view {
+		display: flex;
+	} 
+	.tag-label-view {
+		width: 150upx;
+		align-items: center;
+	}
+	.tag-label {
+		flex: 1;
+		line-height: 0upx;
+		font-size: 24upx;
+		color: #555;
+		text-align: left;
+	}
+	.tag-label-view {
+		width: 150upx;
+		text-align:center;
+	}
+	.tag-oneview {
+		display: flex;
+		justify-content: center;
+	}
 </style>

@@ -1,20 +1,7 @@
 <template>
 	<view class="index">
-		<block v-for="(list, index) in lists" :key="index">
-			<view class="row">
-				<view class="card card-list2" v-for="(item,key) in list" @click="goDetail(item)" :key="key">
-					<image class="card-img card-list2-img" :src="item.img_src"></image>
-					<text class="card-num-view card-list2-num-view">{{item.img_num}}P</text>
-					<view class="card-bottm row">
-						<view class="car-title-view row">
-							<text class="card-title card-list2-title">{{item.title}}</text>
-						</view>
-						<view @click.stop="share(item)" class="card-share-view"></view>
-					</view>
-				</view>
-			</view>
-		</block>
-		<text class="loadMore">加载中...</text>
+		
+		<text class="loadMore">我是购物车</text>
 	</view>
 </template>
 

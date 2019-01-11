@@ -2,7 +2,7 @@
   <view class="_view data-v-19facec4 about">
     <view class="_view data-v-19facec4 content">
       <view class="_view data-v-19facec4 qrcode">
-        <image src="https://img.cdn.aliyun.dcloud.net.cn/stream/qr/__UNI__FAD3FD9.png/256" bindlongtap="handleProxy" data-eventid="{{'SZR-0'}}" data-comkey="{{$k}}" class="_image data-v-19facec4"></image>
+        <image src="https://img.cdn.aliyun.dcloud.net.cn/stream/qr/__UNI__FAD3FD9.png/256" bindlongtap="handleProxy" data-eventid="{{'hum-0'}}" data-comkey="{{$k}}" class="_image data-v-19facec4"></image>
         <text style="margin-top:20px;" class="_text data-v-19facec4">扫码体验看图App模板</text>
       </view>
       <view class="_view data-v-19facec4 desc"> 基于uni-app开发的看图App模版，项目已开源。 </view>
@@ -15,11 +15,11 @@
           </view>
           <view class="_view data-v-19facec4 source-cell">
             <text space="nbsp" class="_text data-v-19facec4">2. </text>
-            <text bindtap="handleProxy" class="_text data-v-19facec4 link" data-eventid="{{'4pt-1'}}" data-comkey="{{$k}}">{{sourceLink}}</text>
+            <text bindtap="handleProxy" class="_text data-v-19facec4 link" data-eventid="{{'flt-1'}}" data-comkey="{{$k}}">{{sourceLink}}</text>
           </view>
         </view>
       </view>
-      <button type="primary" bindtap="handleProxy" data-eventid="{{'pTY-2'}}" data-comkey="{{$k}}" class="_button data-v-19facec4">分享</button>
+      <button type="primary" bindtap="handleProxy" data-eventid="{{'EWS-2'}}" data-comkey="{{$k}}" class="_button data-v-19facec4">分享</button>
     </view>
     <view class="_view data-v-19facec4 version"> 当前版本：{{version}} </view>
   </view>

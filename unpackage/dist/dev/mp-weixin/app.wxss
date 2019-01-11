@@ -9,8 +9,9 @@
   -webkit-box-flex: 1;
   -webkit-flex: 1;
   flex: 1;
-  width: 750rpx;
+  width: 100%;
   min-height: 100vh;
+  background-color: #FFFFFF;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -webkit-flex-direction: column;
@@ -36,7 +37,7 @@
 }
 .card {
   position: relative;
-  width: 710rpx;
+  width: 100%;
   margin: 20rpx 20rpx 20rpx 20rpx;
   border-radius: 10rpx;
   overflow: hidden;
@@ -151,9 +152,13 @@
   -webkit-flex: 1;
   flex: 1;
   width: 100%;
+  height: 170rpx;
   margin: auto;
   text-align: center;
   padding: auto;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
   -webkit-flex-direction: row;
@@ -166,7 +171,6 @@
   -webkit-align-content: flex-start;
   align-content: flex-start;
 }
-view.tag,
 .tag {
   display: block;
   width: 180rpx;
@@ -176,10 +180,20 @@ view.tag,
   box-sizing: border-box;
   text-align: center;
 }
+view.tag,
+.tag {
+  display: block;
+  width: 130rpx;
+  height: 130rpx;
+  padding: 24rpx;
+  line-height: 1;
+  box-sizing: border-box;
+  text-align: center;
+}
 .tag-img {
   border-radius: 60rpx;
-  width: 120rpx;
-  height: 120rpx;
+  width: 80rpx;
+  height: 80rpx;
 }
 .tag-text {
   font-size: 28rpx;
@@ -435,12 +449,6 @@ view.tag,
   -webkit-box-flex: 1;
   -webkit-flex: 1;
   flex: 1;
-}
-page,
-view {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: flex;
 }
 page {
   display: -webkit-box;

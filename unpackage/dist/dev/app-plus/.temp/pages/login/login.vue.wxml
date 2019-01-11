@@ -1,5 +1,5 @@
 <template name="6f8fe6a8">
-  <form class="_form data-v-01e5597b loginView" bindsubmit="handleProxy" data-eventid="{{'kum-1'}}" data-comkey="{{$k}}">
+  <form class="_form data-v-01e5597b loginView" bindsubmit="handleProxy" data-eventid="{{'6Oy-1'}}" data-comkey="{{$k}}">
     <view class="_view data-v-01e5597b input-view">
       <view class="_view data-v-01e5597b label-view">
         <text class="_text data-v-01e5597b label">账号 </text>
@@ -14,7 +14,7 @@
     </view>
     <view class="_view data-v-01e5597b button-view">
       <button type="default" class="_button data-v-01e5597b login" hover-class="hover" formType="submit">登录</button>
-      <button type="default" class="_button data-v-01e5597b register" hover-class="hover" bindtap="handleProxy" data-eventid="{{'XZd-0'}}" data-comkey="{{$k}}">免费注册</button>
+      <button type="default" class="_button data-v-01e5597b register" hover-class="hover" bindtap="handleProxy" data-eventid="{{'pAW-0'}}" data-comkey="{{$k}}">免费注册</button>
     </view>
   </form>
 </template>

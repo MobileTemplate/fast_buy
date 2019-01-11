@@ -17,11 +17,6 @@
 <style>
 	
     @import './common/common.css';
-	
-    page,
-    view {
-        display: flex;
-    }
 
     page {
         display: flex;

@@ -44,5 +44,7 @@
 </script>
 
 <style>
-	
+	view {
+		display: flex;
+	}
 </style>

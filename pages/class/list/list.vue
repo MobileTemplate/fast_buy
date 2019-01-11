@@ -24,7 +24,7 @@
 
 	import {
 		friendlyDate
-	} from '@/common/util.js';
+	} from '@/common/js/util.js';
 
 	export default {
 		components: {
@@ -125,7 +125,7 @@
 			},
 			goDetail(detail) {
 				uni.navigateTo({
-					url: '/pages/detail/detail?query=' + encodeURIComponent(JSON.stringify(detail))
+					url: '../detail/detail?query=' + encodeURIComponent(JSON.stringify(detail))
 				});
 			},
 			dislike(tabIndex, newsIndex) {

@@ -16,7 +16,8 @@
 
 <style>
 	
-    @import './common/common.css';
+    @import './common/css/common.css';
+	@import "./common/css/simplepro.css";
 
     page {
         display: flex;

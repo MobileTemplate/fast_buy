@@ -32,7 +32,7 @@
 
 	import {
 		friendlyDate
-	} from '@/common/util.js';
+	} from '@/common/js/util.js';
 
 	const dom = weex.requireModule('dom');
 

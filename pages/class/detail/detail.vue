@@ -1,5 +1,5 @@
 <template>
-	<view>
+	<view style="background-color: #FFFFFF;">
 		<view class="banner">
 			<image class="banner-img" :src="banner.image_url"></image>
 			<view class="banner-title">{{banner.title}}</view>
@@ -65,7 +65,7 @@
 		height: 360upx;
 		overflow: hidden;
 		position: relative;
-		background-color: #ccc;
+		background-color: #FFFFFF;
 	}
 
 	.banner-img {

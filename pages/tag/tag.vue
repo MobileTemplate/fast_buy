@@ -105,7 +105,7 @@
 		methods: {
 			goList(value) {
 				uni.navigateTo({
-					url:'../list/list?type=' + value.type + '&id=' + value.id
+					url:'../shop/detail/index?type=' + value.type + '&id=' + value.id
 				})
 			},
 			canvasIdErrorCallback: function (e) {

@@ -1,26 +1,26 @@
 <template>
-	<view class="s-page-wrapper is-100vh">
-		<view class="is-33vh has-mgt-10">
+	<view class="s-page-wrapper is-100vh" style="width: 100%;">
+		<view class="is-20vh has-mgt-30">
 			<view class="is-flex is-column is-justify-center  is-align-center is-height-100">
-				<image src="../../static/img/common/logo.jpg" mode="aspectFit" class="logoimg"></image>
+				<image src="../../static/1181030.png" mode="aspectFit" class="logoimg"></image>
 			</view>
 		</view>
 		<view class="registercontent">
 			<view class="has-mglr-10 ">
-				<view class=" has-mgtb-10 ">
+				<view class="has-mgtb-10 ">
 					<input type="number" maxlength="11" placeholder="请输入手机号" class="is-input1 " />
 				</view>
-				<view class=" has-mgtb-10 ">
+				<view class="has-mgtb-10 ">
 					<input type="number" maxlength="6" placeholder="短信验证码" class="is-input1 " />
 					<view class="codeimg" @tap="getsmscode">{{smsbtn.text}}</view>
 				</view>
 
-				<view class=" has-radius has-mgtb-10">
+				<view class="has-radius has-mgtb-10">
 					<input placeholder="请输入登录密码" :password="true" class="is-input1" />
 
 				</view>
-				<view class=" registerbtn has-radius has-mgtb-20">
-					<button>注 册</button>
+				<view class="registerbtn has-radius has-mgtb-20" >
+					<button :loading="loading" @tap="fhLogin">{{loading ? "注册中...":"注 册"}}</button>
 				</view>
 			</view>
 		</view>
@@ -41,6 +41,7 @@
 					status: false,
 					codeTime: 60
 				},
+				loading: false,
 				timerId: null,
 			};
 		},
@@ -60,8 +61,17 @@
 					},
 					1000);
 				return false;
+			},
+			fhLogin: function(){
+				this.loading = true;
+				setTimeout((e=>{
+					this.loading = false;
+					uni.reLaunch({
+						url:"login"
+					})
+				}),1500);
+				
 			}
-
 		}
 	}
 </script>
@@ -73,7 +83,7 @@
 	}
 
 	.registercontent {
-		width: 85%;
+		width: 100%;
 		margin: 0 auto;
 	}
 

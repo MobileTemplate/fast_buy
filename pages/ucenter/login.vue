@@ -1,6 +1,6 @@
 <template>
 	<view class="s-page-wrapper is-100vh" style="width: 100%;">
-		<view class="is-22vh has-mgt-10">
+		<view class="is-20vh has-mgt-30">
 			<view class="is-flex is-column is-justify-center  is-align-center is-height-100">
 				<image src="../../static/1181030.png" mode="aspectFit" class="logoimg"></image>
 			</view>
@@ -15,13 +15,19 @@
 				</view>
 
 				<view class=" loginbtn has-radius has-mgtb-20">
-					<button :loading="login.loading" @tap="defaultHandlerLogin"> {{ login.loading ? "登录中...":"登 录"}} </button>
+					<button :loading="login.loading" @tap="defaultHandlerLogin">{{ login.loading ? "登录中...":"登 录"}}</button>
 				</view>
 			</view>
 		</view>
 		<view class="is-20vh has-mgt-80 content">
-			<navigator url="#" class=" has-radius is-right is-grey has-mgr-20" hover-class="">
-				<text>忘记密码？</text><text class="is-blue">点击找回</text>
+			<navigator url="#" class="has-radius is-right is-grey has-mgr-20" hover-class="">
+				<text>忘记密码？</text>
+				<text class="is-blue">点击找回</text>
+			</navigator>
+			<navigator url="register" class=" has-radius is-right is-grey has-mgr-20" hover-class="" @tap="goRegister">
+				<text class="is-blue" style="margin-left: 10rpx;">
+					注册
+				</text>
 			</navigator>
 		</view>
 	</view>
@@ -44,12 +50,20 @@
 				this.login.loading = true;
 				setTimeout((e=>{
 					this.login.loading = false;
+					uni.reLaunch({
+						url:"../tag/tag"
+					})
 				}),1500);
 				console.log(JSON.stringify(this.login)); 
 			},
 			BindInput:function(e){
 				var dataval = e.currentTarget.dataset.val;
 				this.login[dataval] = e.detail.value; 
+			},
+			goRegister:function(){
+				uni.reLaunch({
+					url:"register"
+				})
 			}
 		}
 	}

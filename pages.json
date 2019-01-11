@@ -3,10 +3,13 @@
 		{
 			"path": "pages/ucenter/login",
 			"style": {
-				"navigationBarTitleText": "",
-				"app-plus":{
-					"bounce":"none"
-				}
+				"navigationBarTitleText": "登录"
+			}
+		},
+		{
+			"path": "pages/ucenter/register",
+			"style": {
+				"navigationBarTitleText": "注册"
 			}
 		},
 		{

@@ -4,32 +4,27 @@
 			<view v-for="(tab, index) in tabBars" :key="tab.ref" :class="['swiper-tab-list',tabIndex==index ? 'active' : '']"
 			 :id="tab.ref" :data-current="index" @click="tapTab(index)">{{tab.name}}</view>
 		</scroll-view>
-		<swiper :current="tabIndex" class="swiper-box" duration="300" @change="changeTab">
-			<swiper-item v-for="(tabItem, tabIndex) in newsList" :key="tabIndex">
-				<scroll-view class="list" scroll-y @scrolltolower="loadMore(tabIndex)">
-					<block v-for="(newsItem, newsIndex) in tabItem.data" :key="newsIndex">
-						<uni-media-list :data="newsItem" @close="dislike(tabIndex, newsIndex)" @click="goDetail(newsItem)"></uni-media-list>
-					</block>
-					<view class="uni-tab-bar-loading">
-						<uni-load-more :loadingType="tabItem.loadingText" :contentText="loadingText"></uni-load-more>
-					</view>
-				</scroll-view>
-			</swiper-item>
-		</swiper>
+		<view v-for="(item, i) in jggData" :key="i">
+			<text style="margin-left: 10upx;">{{item.title}}</text>
+			<uni-grid :data="item.data" column-num="4" show-border="false" @click="goDetail()"></uni-grid>
+		</view>
 	</view>
 </template>
 <script>
 	import uniMediaList from '@/components/uni-media-list/uni-media-list.vue';
 	import uniLoadMore from '@/components/uni-load-more/uni-load-more.vue';
+	import uniGrid from "@/components/uni-grid/uni-grid.vue";
 
 	import {
-		friendlyDate
+		friendlyDate,
+		Request
 	} from '@/common/js/util.js';
 
 	export default {
 		components: {
 			uniMediaList,
-			uniLoadMore
+			uniLoadMore,
+			uniGrid
 		},
 		data() {
 			return {
@@ -67,7 +62,35 @@
 					name: '手机数码',
 					id: 208,
 					ref: 'qukuailian'
-				} ]
+				}],
+				jggData: [
+					{
+						title: "零食",
+						data: [
+							{image:'https://img-cdn-qiniu.dcloud.net.cn/img/shu.png',text:'圣诞树'},
+							{image:'https://img-cdn-qiniu.dcloud.net.cn/img/lindang.png',text:'铃铛'},
+							{image:'https://img-cdn-qiniu.dcloud.net.cn/img/laoren.png',text:'圣诞老人'},
+							{image:'https://img-cdn-qiniu.dcloud.net.cn/img/liwu.png',text:'礼物'},
+							{image:'https://img-cdn-qiniu.dcloud.net.cn/img/maozi.png',text:'帽子'},
+							{image:'https://img-cdn-qiniu.dcloud.net.cn/img/shoutao.png',text:'手套'},
+							{image:'https://img-cdn-qiniu.dcloud.net.cn/img/xueqiao.png',text:'雪橇'},
+							{image:'https://img-cdn-qiniu.dcloud.net.cn/img/xunlu.png',text:'驯鹿'}
+						]
+					},
+					{
+						title: "大礼包",
+						data: [
+							{image:'https://img-cdn-qiniu.dcloud.net.cn/img/shu.png',text:'圣诞树'},
+							{image:'https://img-cdn-qiniu.dcloud.net.cn/img/lindang.png',text:'铃铛'},
+							{image:'https://img-cdn-qiniu.dcloud.net.cn/img/laoren.png',text:'圣诞老人'},
+							{image:'https://img-cdn-qiniu.dcloud.net.cn/img/liwu.png',text:'礼物'},
+							{image:'https://img-cdn-qiniu.dcloud.net.cn/img/maozi.png',text:'帽子'},
+							{image:'https://img-cdn-qiniu.dcloud.net.cn/img/shoutao.png',text:'手套'},
+							{image:'https://img-cdn-qiniu.dcloud.net.cn/img/xueqiao.png',text:'雪橇'},
+							{image:'https://img-cdn-qiniu.dcloud.net.cn/img/xunlu.png',text:'驯鹿'}
+						]
+					}
+				]
 			}
 		},
 		onLoad: function() {
@@ -93,33 +116,31 @@
 				if (action === 1) {
 					activeTab.requestParams.minId = 0;
 				}
-				uni.request({
-					url: 'https://unidemo.dcloud.net.cn/api/news',
-					data: activeTab.requestParams,
-					success: (result) => {
-						if (result.statusCode == 200) {
-							const data = result.data.map((news) => {
-								return {
-									id: news.id,
-									article_type: 1,
-									datetime: friendlyDate(new Date(news.published_at.replace(/\-/g, '/')).getTime()),
-									title: news.title,
-									image_url: news.cover,
-									source: news.author_name,
-									comment_count: news.comments_count,
-									post_id: news.post_id
-								};
+				console.log(activeTab.requestParams);
+				Request('https://unidemo.dcloud.net.cn/api/news', activeTab.requestParams, (result)=>{
+					if (result.statusCode == 200) {
+						
+						const data = result.data.map((news) => {
+							return {
+								id: news.id,
+								article_type: 1,
+								datetime: friendlyDate(new Date(news.published_at.replace(/\-/g, '/')).getTime()),
+								title: news.title,
+								image_url: news.cover,
+								source: news.author_name,
+								comment_count: news.comments_count,
+								post_id: news.post_id
+							};
+						});
+						if (action === 1) {
+							activeTab.data = data;
+							this.refreshing = false;
+						} else {
+							data.forEach((news) => {
+								activeTab.data.push(news);
 							});
-							if (action === 1) {
-								activeTab.data = data;
-								this.refreshing = false;
-							} else {
-								data.forEach((news) => {
-									activeTab.data.push(news);
-								});
-							}
-							activeTab.requestParams.minId = data[data.length - 1].id;
 						}
+						activeTab.requestParams.minId = data[data.length - 1].id;
 					}
 				});
 			},

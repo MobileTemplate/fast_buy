@@ -1,5 +1,5 @@
 <template>
-	<view>
+	<view style="width: 100%;">
 		<view class="header" v-bind:class="{'status':isH5Plus}">
 			<view class="userinfo">
 				<view class="face">
@@ -11,7 +11,7 @@
 				</view>
 			</view>
 			<view class="setting">
-				<image src="../../static/HM-PersonalCenter/setting.png"></image>
+				<image src="../../static/userinfo/setting.png"></image>
 			</view>
 		</view>
 		<view class="orders">
@@ -19,7 +19,7 @@
 				<view class="label" v-for="(row,index) in orderTypeLise" wx:key="row.name" hover-class="hover" hover-stay-time="50" @tap="toOrderType(index)">
 					<view class="icon">
 						<view class="badge" v-if="row.badge>0">{{row.badge}}</view>
-						<image :src="'../../static/HM-PersonalCenter/'+row.icon"></image>
+						<image :src="'../../static/userinfo/'+row.icon"></image>
 					</view>
 					{{row.name}}
 				</view>
@@ -28,10 +28,10 @@
 		<view class="list" v-for="(list,list_i) in severList" wx:key="list">
 			<view class="li" v-for="(li,li_i) in list" @tap="toPage(list_i,li_i)" v-bind:class="{'noborder':li_i==list.length-1}"  hover-class="hover"  hover-stay-time="50"  wx:key="li.name" >
 				<view class="icon">
-					<image :src="'../../static/HM-PersonalCenter/sever/'+li.icon"></image>
+					<image :src="'../../static/userinfo/sever/'+li.icon"></image>
 				</view>
 				<view class="text">{{li.name}}</view>
-				<image class="to" src="../../static/HM-PersonalCenter/to.png"></image>
+				<image class="to" src="../../static/userinfo/to.png"></image>
 			</view>
 		</view>
 	</view>
@@ -80,7 +80,7 @@
 				this.userinfo={
 					face:'../../static/HM-PersonalCenter/face.jpeg',
 					username:"VIP会员10240",
-					integral:"1435"
+					integral:"10240"
 				}		
 			},
 			//用户点击订单类型

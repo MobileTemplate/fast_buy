@@ -47,6 +47,20 @@ function friendlyDate(timestamp) {
 	}
 	return formats[diffType].replace('%n%', diffValue);
 }
+
+function Request(url, data, callback) {
+	uni.request({
+		url: url,
+		data: data,
+		success: (result) => {
+			if(callback){
+				callback(result)
+			}
+		}
+	})
+}
+
 export {
-	friendlyDate
+	friendlyDate,
+	Request
 }

@@ -117,8 +117,6 @@
 
 <style>
 	scroll-view {
-		display:-webkit-box;
-		display:-webkit-flex;
 		display:flex;
 	}
 	.tag_index {

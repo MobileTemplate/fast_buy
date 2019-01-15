@@ -17,14 +17,14 @@
 			"path": "pages/new/new",
 			"style": {
 				"navigationBarTitleText": "分类",
-				"enablePullDownRefresh": true
+				"enablePullDownRefresh": false
 			}
 		},
 		{
 			"path": "pages/hot/hot",
 			"style": {
 				"navigationBarTitleText": "购物车",
-				"enablePullDownRefresh": true
+				"enablePullDownRefresh": false
 			}
 		},
 		{
@@ -54,7 +54,6 @@
 				}
 			}
 		},
-		
 		{
 			"path": "pages/tag/tag",
 			"style": {
@@ -66,7 +65,7 @@
 			"path": "pages/list/list",
 			"style": {
 				"navigationBarTitleText": "专题",
-				"enablePullDownRefresh": true
+				"enablePullDownRefresh": false
 			}
 		},
 		{
@@ -96,7 +95,7 @@
 			"path": "pages/class/list/list",
 			"style": {
 				"navigationBarTitleText": "分类",
-				"enablePullDownRefresh": true
+				"enablePullDownRefresh": false
 			}
 		}
 	],

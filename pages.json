@@ -89,7 +89,9 @@
 		},
 		{
 			"path": "pages/class/detail/detail",
-			"style": {}
+			"style": {
+				"navigationBarTitleText": "商品详情"
+			}
 		},
 		{
 			"path": "pages/class/list/list",

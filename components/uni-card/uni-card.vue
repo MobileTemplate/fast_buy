@@ -8,7 +8,7 @@
 			<view class="uni-card__header-extra-text" v-if="extra">{{extra}}</view>
 		</view>
 		<view class="uni-card__content" :class="isFull === false || isFull === 'false' ? 'uni-card__content--pd' : ''">
-			<slot />
+			<slot></slot>
 		</view>
 		<view class="uni-card__footer" v-if="note">{{note}}</view>
 	</view>
@@ -47,7 +47,6 @@
 	.uni-card {
 		margin: $uni-spacing-col-base;
 		background: $uni-bg-color;
-		position: relative;
 		display: flex;
 		flex-direction: column;
 

@@ -99,6 +99,20 @@
 				"navigationBarTitleText": "分类",
 				"enablePullDownRefresh": false
 			}
+		},
+		{
+			"path": "pages/evaluate/evaluate",
+			"style": {
+				"navigationBarTitleText": "评价",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/feedback/feedback",
+			"style": {
+				"navigationBarTitleText": "反馈",
+				"enablePullDownRefresh": false
+			}
 		}
 	],
 	"condition": { //模式配置，仅开发期间生效

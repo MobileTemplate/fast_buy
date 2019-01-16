@@ -1,9 +1,9 @@
 <template>
 	<view class="uni-tab-bar">
-		<scroll-view id="tab-bar" class="uni-swiper-tab" scroll-x :scroll-left="scrollLeft">
+		<!-- <scroll-view id="tab-bar" class="uni-swiper-tab" scroll-x :scroll-left="scrollLeft">
 			<view v-for="(tab, index) in tabBars" :key="tab.ref" :class="['swiper-tab-list',tabIndex==index ? 'active' : '']"
 			 :id="tab.ref" :data-current="index" @click="tapTab(index)">{{tab.name}}</view>
-		</scroll-view>
+		</scroll-view> -->
 		<view v-for="(item, i) in jggData" :key="i">
 			<text style="margin-left: 10upx;">{{item.title}}</text>
 			<uni-grid :data="item.data" column-num="4" show-border="false" @click="goDetail()"></uni-grid>
@@ -107,42 +107,11 @@
 					loadingText: '加载中...'
 				});
 			});
-			this.getList();
+			// this.getList();
 		},
 		methods: {
 			getList(action = 1) {
-				let activeTab = this.newsList[this.tabIndex];
-				activeTab.requestParams.time = new Date().getTime() + '';
-				if (action === 1) {
-					activeTab.requestParams.minId = 0;
-				}
-				console.log(activeTab.requestParams);
-				Request('https://unidemo.dcloud.net.cn/api/news', activeTab.requestParams, (result)=>{
-					if (result.statusCode == 200) {
-						
-						const data = result.data.map((news) => {
-							return {
-								id: news.id,
-								article_type: 1,
-								datetime: friendlyDate(new Date(news.published_at.replace(/\-/g, '/')).getTime()),
-								title: news.title,
-								image_url: news.cover,
-								source: news.author_name,
-								comment_count: news.comments_count,
-								post_id: news.post_id
-							};
-						});
-						if (action === 1) {
-							activeTab.data = data;
-							this.refreshing = false;
-						} else {
-							data.forEach((news) => {
-								activeTab.data.push(news);
-							});
-						}
-						activeTab.requestParams.minId = data[data.length - 1].id;
-					}
-				});
+				
 			},
 			goDetail(detail) {
 				uni.navigateTo({

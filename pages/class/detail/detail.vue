@@ -6,7 +6,7 @@
 				<image style="width: 100%; height:100%;" class="lb-img" :src="item.img"></image>
 			</swiper-item>
 		</swiper>
-		<view style="width: 100%; text-align: center;">
+		<view style="width: 100%; text-align: center; margin-top: 10upx;">
 			<text style="line-height: 1upx; font-size: 14px; font-weight: 700; color: #000;">
 				良品铺子 手剥松子218g 坚果炒货 巴西松子
 			</text>
@@ -51,33 +51,123 @@
 		</uni-list>
 
 		<view class="uni-tab-bar">
-			<scroll-view id="tab-bar" class="uni-swiper-tab" scroll-x :scroll-left="scrollLeft">
+			<scroll-view id="tab-bar" class="uni-swiper-tab" scroll-x :scroll-left="0">
 				<view v-for="(tab, index) in tabBars" :key="tab.ref" 
 				:class="['swiper-tab-list',tabIndex==index ? 'active' : '']"
 				 :id="tab.ref" :data-current="index" @click="tapTab(index)">{{tab.name}}</view>
 			</scroll-view>
 		</view>
-		<uni-card is-full="false" title="产品参数">
-			<view style="font-size: 20upx;">产品类型: 烘炒类</view>
-			<view style="font-size: 20upx;">原料产地: 巴基斯坦</view>
-			<view style="font-size: 20upx;">产地: 湖北省武汉市</view>
-			<view style="font-size: 20upx;">配料表: 进口松子、食用盐</view>
-			<view style="font-size: 20upx;">产品规格: 210g</view>
-			<view style="font-size: 20upx;">保质期: 180天</view>
-			<view style="font-size: 20upx;">产品标准号: GB/T 22165</view>
-			<view style="font-size: 20upx;">生产许可证编号：QS4201 1801 0226</view>
-			<view style="font-size: 20upx;">储存方法： 请放置于常温、阴凉、通风、干燥处保存 </view>
-			<view style="font-size: 20upx; margin-top: 10upx;">食用方法： 开袋去壳即食</view>
-		</uni-card>
-		<uni-card is-full="false" title="产品详细">
-			<image style="width: 100%;" src="../../../static/shop/tw1.jpg"></image>
-			<image style="width: 100%;" src="../../../static/shop/tw2.jpg"></image>
-			<image style="width: 100%;" src="../../../static/shop/tw3.jpg"></image>
-			<image style="width: 100%;" src="../../../static/shop/tw4.jpg"></image>
-			<image style="width: 100%;" src="../../../static/shop/tw5.jpg"></image>
-			<image style="width: 100%;" src="../../../static/shop/tw6.jpg"></image>
-			<image style="width: 100%;" src="../../../static/shop/tw7.jpg"></image>
-		</uni-card>
+		<view :style="tabIndex!=0 && {'display':'none'}">
+			<uni-card is-full="false" title="产品参数">
+				<view style="font-size: 26upx;">
+					<view>产品类型: 烘炒类</view>
+					<view>原料产地: 巴基斯坦</view>
+					<view>产地: 湖北省武汉市</view>
+					<view>配料表: 进口松子、食用盐</view>
+					<view>产品规格: 210g</view>
+					<view>保质期: 180天</view>
+					<view>产品标准号: GB/T 22165</view>
+					<view>生产许可证编号：QS4201 1801 0226</view>
+					<view>储存方法： 请放置于常温、阴凉、通风、干燥处保存 </view>
+					<view>食用方法： 开袋去壳即食</view>
+				</view>
+			</uni-card>
+			<uni-card is-full="false" title="产品详细">
+				<image style="width: 100%;" src="../../../static/shop/tw1.jpg"></image>
+				<image style="width: 100%;" src="../../../static/shop/tw2.jpg"></image>
+				<image style="width: 100%;" src="../../../static/shop/tw3.jpg"></image>
+				<image style="width: 100%;" src="../../../static/shop/tw4.jpg"></image>
+				<image style="width: 100%;" src="../../../static/shop/tw5.jpg"></image>
+				<image style="width: 100%;" src="../../../static/shop/tw6.jpg"></image>
+				<image style="width: 100%;" src="../../../static/shop/tw7.jpg"></image>
+			</uni-card>
+		</view>
+		
+		<view :style="tabIndex!=1 && {'display':'none'}">
+			<uni-card is-full="false" title="产品参数">
+				<view style="font-size: 26upx;">
+					<view>产品类型: 烘炒类</view>
+					<view>原料产地: 巴基斯坦</view>
+					<view>产地: 湖北省武汉市</view>
+					<view>配料表: 进口松子、食用盐</view>
+					<view>产品规格: 210g</view>
+					<view>保质期: 180天</view>
+					<view>产品标准号: GB/T 22165</view>
+					<view>生产许可证编号：QS4201 1801 0226</view>
+					<view>储存方法： 请放置于常温、阴凉、通风、干燥处保存 </view>
+					<view>食用方法： 开袋去壳即食</view>
+				</view>
+			</uni-card>
+			<view class="uni-tab-bar">
+				<scroll-view id="tab-bar" class="uni-swiper-tab" scroll-x :scroll-left="0">
+					<view class="swiper-tab-list1">全部评价(32)</view>
+					<view class="swiper-tab-list1">好评(20)</view>
+					<view class="swiper-tab-list1">中评(10)</view>
+					<view class="swiper-tab-list1">差评(2)</view>
+				</scroll-view>
+			</view>
+			<view>
+			    <view class="uni-padding-wrap">
+			        <!-- 评论区 start -->
+			        <view class="uni-comment">
+			            <view class="uni-comment-list">
+			                <view class="uni-comment-face">
+			                    <image src="https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/uni@2x.png" mode="widthFix"></image>
+			                </view>
+			                <view class="uni-comment-body">
+			                    <view class="uni-comment-top">
+			                        <text>网友</text>
+			                    </view>
+			                    <view class="uni-comment-date">
+			                        <text>08/10 08:12</text>
+			                    </view>
+			                    <view class="uni-comment-content">很酷的HBuilderX和uni-app，开发一次既能生成小程序，又能生成App</view>
+			                </view>
+			            </view>
+			            <view class="uni-comment-list">
+			                <view class="uni-comment-face">
+			                    <image src="https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/uni@2x.png" mode="widthFix"></image>
+			                </view>
+			                <view class="uni-comment-body">
+			                    <view class="uni-comment-top">
+			                        <text>马克一天</text>
+			                    </view>
+			                    <view class="uni-comment-content">很强大，厉害了我的uni-app!</view>
+			                </view>
+			            </view>
+			            <view class="uni-comment-list">
+			                <view class="uni-comment-face">
+			                    <image src="https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/uni@2x.png" mode="widthFix"></image>
+			                </view>
+			                <view class="uni-comment-body">
+			                    <view class="uni-comment-top">
+			                        <text>今生缘</text>
+			                    </view>
+			                    <view class="uni-comment-content">好牛逼的感觉，是不是小程序、App、移动端都互通了？</view>
+			                    <view class="uni-comment-date">
+			                        <text>08/10 07:55</text>
+			                    </view>
+			                </view>
+			            </view>
+			            <view class="uni-comment-list">
+			                <view class="uni-comment-face">
+			                    <image src="https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/uni@2x.png" mode="widthFix"></image>
+			                </view>
+			                <view class="uni-comment-body">
+			                    <view class="uni-comment-top">
+			                        <text>小猫咪</text>
+			                    </view>
+			                    <view class="uni-comment-content">支持国产，支持DCloud!</view>
+			                    <view class="uni-comment-date">
+			                        <view>2天前</view>
+			                        <view class="uni-comment-replay-btn">5回复</view>
+			                    </view>
+			                </view>
+			            </view>
+			        </view>
+			    </view>
+			</view>
+		</view>
 	</view>
 </template>
 
@@ -86,6 +176,7 @@
 	import uniList from "@/components/uni-list/uni-list.vue";
 	import uniListItem from "@/components/uni-list-item/uni-list-item.vue";
 	import uniCard from "@/components/uni-card/uni-card.vue";
+	// import evaluate from "@/pages/ev"
 	
 	const FAIL_CONTENT = '<p>获取信息失败</p>';
 	export default {
@@ -110,6 +201,7 @@
 				],
 				interval: 5000,
 				duration: 1000,
+				tabIndex: 0,
 				banner: {},
 				content: '',
 				tabBars: [{
@@ -129,6 +221,7 @@
 		},
 		methods: {
 			tapTab(index){
+				this.tabIndex = index;
 				console.log(index);
 			}
 		}
@@ -255,7 +348,7 @@
 	}
 	
 	.swiper-tab-list {
-		font-size: 32upx;
+		font-size: 36upx;
 		font-weight: 700;
 		width: 33%;
 		display: inline-block;
@@ -263,8 +356,97 @@
 		color: #555;
 	}
 	
-	.swiper-tab-list-active {
+	.swiper-tab-list1 {
+		font-size: 30upx;
+		width: 25%;
+		display: inline-block;
+		text-align: center;
+		color: #555;
+	}
+	
+	.active {
 		color: #E4393C;
-		font-size: 16px;
+		font-size: 36upx;
+	}
+	
+	.uni-padding-wrap {
+	    padding: 30upx;
+	}
+	
+	view {
+	    font-size: 28upx;
+	}
+	
+	.uni-comment {
+	    padding: 5rpx 0;
+	    display: flex;
+	    flex-grow: 1;
+	    flex-direction: column;
+	}
+	
+	.uni-comment-list {
+	    flex-wrap: nowrap;
+	    padding: 10rpx 0;
+	    margin: 10rpx 0;
+	    width: 100%;
+	    display: flex;
+	}
+	
+	.uni-comment-face {
+	    width: 70upx;
+	    height: 70upx;
+	    border-radius: 100%;
+	    margin-right: 20upx;
+	    flex-shrink: 0;
+	    overflow: hidden;
+	}
+	
+	.uni-comment-face image {
+	    width: 100%;
+	    border-radius: 100%;
+	}
+	
+	.uni-comment-body {
+	    width: 100%;
+	}
+	
+	.uni-comment-top {
+	    line-height: 1.5em;
+	    justify-content: space-between;
+	}
+	
+	.uni-comment-top text {
+	    color: #0A98D5;
+	    font-size: 24upx;
+	}
+	
+	.uni-comment-date {
+	    line-height: 38upx;
+	    flex-direction: row;
+	    justify-content: space-between;
+	    display: flex !important;
+	    flex-grow: 1;
+	}
+	
+	.uni-comment-date view {
+	    color: #666666;
+	    font-size: 24upx;
+	    line-height: 38upx;
+	}
+	
+	.uni-comment-content {
+	    line-height: 1.6em;
+	    font-size: 28upx;
+	    padding: 8rpx 0;
+	}
+	
+	.uni-comment-replay-btn {
+		background: #FFF;
+	    font-size: 24upx;
+	    line-height: 28upx;
+	    padding: 5rpx 20upx;
+	    border-radius: 30upx;
+	    color: #333 !important;
+	    margin: 0 10upx;
 	}
 </style>

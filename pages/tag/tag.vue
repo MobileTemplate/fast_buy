@@ -1,5 +1,14 @@
 <template>
 	<view class="tag_index">
+		<uni-nav-bar fixed="true" color="#FFF" background-color="#FF80AB">
+			<view style="margin-left: -120upx;">
+				<mSearch :show="false" @search="search($event,1)"></mSearch>
+			</view>
+			<view slot="right">
+				<uni-icon style="margin-top: -10upx;"  type="scan" color="#FFF" size="24"></uni-icon>
+			</view>
+		</uni-nav-bar>
+		
 		<swiper style="width: 100%;" :indicator-dots="true" :autoplay="true" :interval="interval" 
 		:duration="duration" :circular="true">
 			<swiper-item v-for="(item, i) in lb_data" :key="i">
@@ -33,7 +42,7 @@
 		<view style="flex:1; height: 6upx; width: 100%; background-color: #EFEFEF;"/>
 		<view class="tags" style="background-color: #EFEFEF;">
 			<view class="tag-oneview" style="width: 100%; height: 300upx; background-color: #FFFFFF;">
-					
+				
 			</view>
 			<view style=" height: 6upx; width: 100%; background-color: #EFEFEF;"/>
 			<view class="tag-oneview" style="width: 49.7%; height: 300upx; background-color: #FFFFFF;">
@@ -57,29 +66,44 @@
 </template>
 
 <script>
+	import uniNavBar from "@/components/uni-nav-bar/uni-nav-bar.vue";
+	import uniStatusBar from '@/components/uni-status-bar/uni-status-bar.vue';
+	import uniIcon from '@/components/uni-icon/uni-icon.vue';
+	import mSearch from '../../components/mehaotian-search/mehaotian-search.vue';
+	
 	export default {
+		components: {
+			uniNavBar,
+			uniStatusBar,
+			uniIcon,
+			mSearch
+		},
 		data() {
 			return {
 				data: [
 					{
 						type: '分类',
 						id: 1,
-						icon: '../../static/home/grid_1.jpg'
+						icon: '../../static/home/grid_1.jpg',
+						url: '../class/list/list'
 					},
 					{
 						type: '优惠',
 						id: 2,
-						icon: '../../static/home/grid_2.jpg'
+						icon: '../../static/home/grid_2.jpg',
+						url: '../shop/detail/index'
 					},
 					{
 						type: '个人',
 						id: 3,
-						icon: '../../static/home/grid_3.jpg'
+						icon: '../../static/home/grid_3.jpg',
+						url: '../class/class'
 					},
 					{
 						type: '理财',
 						id: 4,
-						icon: '../../static/home/grid_4.jpg'
+						icon: '../../static/home/grid_4.jpg',
+						url: '../class/class'
 					}
 				],
 				lb_data: [
@@ -105,7 +129,7 @@
 		methods: {
 			goList(value) {
 				uni.navigateTo({
-					url:'../shop/detail/index?type=' + value.type + '&id=' + value.id
+					url:value.url
 				})
 			},
 			canvasIdErrorCallback: function (e) {

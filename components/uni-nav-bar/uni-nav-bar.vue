@@ -116,7 +116,6 @@
 
 <style lang="scss">
 	$nav-height:44px;
-
 	.uni-navbar {
 		&__content {
 			display: block;
@@ -124,7 +123,6 @@
 			width: 100%;
 			background-color: $uni-bg-color;
 			overflow: hidden;
-
 			view {
 				line-height: $nav-height;
 			}
@@ -137,18 +135,15 @@
 			height: $nav-height;
 			line-height: $nav-height;
 			font-size: 16px;
-
 			&-btns {
 				display: inline-flex;
 				flex-wrap: nowrap;
 				flex-shrink: 0;
 				width: 120upx;
 				padding: 0 12upx;
-
 				&:first-child {
 					padding-left: 0;
 				}
-
 				&:last-child {
 					width: 60upx;
 				}
@@ -157,7 +152,6 @@
 			&-container {
 				width: 100%;
 				margin: 0 10upx;
-
 				&-inner {
 					font-size: 30upx;
 					text-align: center;
@@ -177,10 +171,6 @@
 			z-index: 998;
 		}
 
-		&--shadow {
-			box-shadow: 0 1px 6px #ccc;
-		}
-
 		&--border:after {
 			position: absolute;
 			z-index: 3;
@@ -191,7 +181,6 @@
 			content: '';
 			-webkit-transform: scaleY(.5);
 			transform: scaleY(.5);
-			background-color: $uni-border-color;
 		}
 	}
 </style>

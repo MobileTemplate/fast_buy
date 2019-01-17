@@ -78,7 +78,7 @@
 			init() {
 				//用户信息
 				this.userinfo={
-					face:'../../static/HM-PersonalCenter/face.jpeg',
+					face:'../../static/userinfo/face.jpeg',
 					username:"VIP会员10240",
 					integral:"10240"
 				}		

@@ -1,14 +1,5 @@
 <template>
 	<view class="tag_index">
-		<uni-nav-bar fixed="true" color="#FFF" background-color="#FF80AB">
-			<view style="margin-left: -120upx;">
-				<mSearch :show="false" @search="search($event,1)"></mSearch>
-			</view>
-			<view slot="right">
-				<uni-icon style="margin-top: -10upx;"  type="scan" color="#FFF" size="24"></uni-icon>
-			</view>
-		</uni-nav-bar>
-		
 		<swiper style="width: 100%;" :indicator-dots="true" :autoplay="true" :interval="interval" 
 		:duration="duration" :circular="true">
 			<swiper-item v-for="(item, i) in lb_data" :key="i">
@@ -82,10 +73,10 @@
 			return {
 				data: [
 					{
-						type: '分类',
+						type: '搜索',
 						id: 1,
 						icon: '../../static/home/grid_1.jpg',
-						url: '../class/list/list'
+						url: '../search/search'
 					},
 					{
 						type: '优惠',
@@ -134,6 +125,17 @@
 			},
 			canvasIdErrorCallback: function (e) {
 			    console.error(e.detail.errMsg)
+			},
+			scanCode(){
+				uni.scanCode({
+					success: function (res) {
+						console.log('条码类型：' + res.scanType);
+						console.log('条码内容：' + res.result);
+					}
+				})
+			},
+			search(value, key){
+				console.log("=============", value, key);
 			}
 		}
 	}

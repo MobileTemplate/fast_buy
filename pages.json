@@ -58,10 +58,7 @@
 			"path": "pages/tag/tag",
 			"style": {
 				"navigationBarTitleText": "首页",
-				"enablePullDownRefresh": true,
-				"app-plus":{
-					"titleNView":false
-				}
+				"enablePullDownRefresh": true
 			}
 		},
 		{
@@ -119,6 +116,13 @@
 			"path": "pages/feedback/feedback",
 			"style": {
 				"navigationBarTitleText": "反馈",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/search/search",
+			"style": {
+				"navigationBarTitleText": "",
 				"enablePullDownRefresh": false
 			}
 		}

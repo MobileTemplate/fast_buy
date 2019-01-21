@@ -36,7 +36,8 @@
 <script>
 	import {
 		PostRequest,
-		GetRequest
+		GetRequest,
+		SetToken
 	} from '@/common/js/util.js';
 	// import CryptoJS from '@/components/'
 	var CryptoJS = require("crypto-js");
@@ -50,6 +51,29 @@
 				},
 
 			};
+		},
+		onLoad() {
+			console.log("-----自动登陆")
+			const self = this;
+			this.login.loading = false;
+			uni.getStorage({
+				key:"login_info",
+				success: function (res) {
+					self.login.loading = true;
+					if(res != null && res.data != null && res.data.token != null) {
+						SetToken(res.data.token);
+						setTimeout((e=>{
+							self.login.loading = false;
+							uni.switchTab({
+								url:'../tag/tag'
+							});
+						}), 1500);
+					}else{
+						self.login.loading = false;
+					}
+				},
+				
+			});
 		},
 		methods:{
 			defaultHandlerLogin:function(e){
@@ -76,9 +100,10 @@
 											token: data.token
 										},
 										success: () => {
-											uni.reLaunch({
-												url:"../tag/tag"
-											})
+											SetToken(data.token);
+											uni.switchTab({
+												url:'../tag/tag'
+											});
 										}
 									})
 								}),500);

@@ -8,7 +8,7 @@ function friendlyDate(timestamp) {
 		'day': '%n% 天前',
 		'hour': '%n% 小时前',
 		'minute': '%n% 分钟前',
-		'second': '%n% 秒前',
+		'second': '%n% 秒前'
 	};
 
 	var now = Date.now();

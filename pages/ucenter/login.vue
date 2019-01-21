@@ -57,7 +57,7 @@
 				var pwd = this.login.password;
 				var phone = this.login.phone;
 				console.log("得到账号:", this.login)
-				GetRequest("/agent/timenow", {a: 1, b: 2}, (tdata, succeed)=>{
+				GetRequest("/agent/timenow", null, (tdata, succeed)=>{
 					if(succeed){
 						var md5pwd = CryptoJS.MD5(pwd+tdata.data).toString(CryptoJS.enc.Hex);
 						var params = {

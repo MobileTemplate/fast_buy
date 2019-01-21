@@ -1,5 +1,5 @@
 var token = "";
-var uri = "http://localhost:8506";
+var uri = "http://test.qianuuu.cn:8506";
 
 function friendlyDate(timestamp) {
 	var formats = {
@@ -61,6 +61,7 @@ function Request(url, data, method, callback) {
 		data: data,
 		method: method,
 		success: (result) => {
+			console.log(result)
 			if(result.statusCode == 200){
 				callback(result.data, true)
 			}else{

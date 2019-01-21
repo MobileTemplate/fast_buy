@@ -90,6 +90,17 @@
 			//用户点击列表项
 			toPage(list_i,li_i){
 				uni.showToast({title: this.severList[list_i][li_i].name});
+				if(this.severList[list_i][li_i].name == "安全中心"){
+					uni.setStorage({
+						key:"login_info",
+						data: null,
+						success: () => {
+							uni.reLaunch({
+								url:"../ucenter/login"
+							})
+						}
+					})
+				}
 			}
 		}
 	}

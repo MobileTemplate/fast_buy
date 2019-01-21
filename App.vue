@@ -24,19 +24,28 @@
 						console.log(res);
 						if(res != null && res.data != null && res.data.token != null) {
 							SetToken(res.data.token);
-							uni.reLaunch({
-								url:'pages/tag/tag'
-							});
+							console.log("================")
+							setTimeout((e=>{
+								uni.reLaunch({
+									url:'pages/tag/tag'
+								});
+							}),1);	
 						}else{
-							uni.reLaunch({
-								url:'pages/ucenter/login'
-							});
+							console.log("-------------------")
+							setTimeout((e=>{
+								uni.reLaunch({
+									url:'pages/ucenter/login'
+								});
+							}),1);	
 						}
 					},
 					fail: function() {
-						uni.reLaunch({
-							url:'pages/ucenter/login'
-						});
+						console.log("++++++++++++++++++")
+						setTimeout((e=>{
+							uni.reLaunch({
+								url:'pages/ucenter/login'
+							});
+						}),1);						
 					}
 				})
 				

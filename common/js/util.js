@@ -1,3 +1,6 @@
+var token = "";
+var uri = "http://localhost:8506";
+
 function friendlyDate(timestamp) {
 	var formats = {
 		'year': '%n% 年前',
@@ -48,19 +51,56 @@ function friendlyDate(timestamp) {
 	return formats[diffType].replace('%n%', diffValue);
 }
 
-function Request(url, data, callback) {
+function Request(url, data, method, callback) {
+	console.log(url, method)
 	uni.request({
 		url: url,
+		header: {
+			"Content-Type": "application/x-www-form-urlencoded"
+		},
 		data: data,
+		method: method,
 		success: (result) => {
+			if(result.statusCode == 200){
+				callback(result.data, true)
+			}else{
+				callback(result.data, false)
+			}
+		},
+		fail: (result) => {
 			if(callback){
-				callback(result)
+				callback(result, false)
 			}
 		}
 	})
 }
 
+function GetRequest(url, data, callback){
+	Request(urlTokne(url), data, "GET", callback);
+}
+
+function PostRequest(url, data, callback){
+	if (data != null) {
+        data = JSON.stringify(data);
+    }
+	Request(urlTokne(url), data, "POST", callback);
+}
+
+function urlTokne(url){
+	url = uri + url;
+	if(token != null && token != ""){
+		url = url +"?token=" + token;
+	}
+	return url;
+}
+
+function SetToken(tk){
+	token = tk;
+}
+
 export {
 	friendlyDate,
-	Request
+	GetRequest,
+	SetToken,
+	PostRequest
 }

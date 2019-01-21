@@ -11,7 +11,7 @@
 					<input type="number" maxlength="11" v-model="login.phone" placeholder="请输入手机号" class="is-input1 " @input="BindInput" data-val="phone" />
 				</view>
 				<view class=" has-radius has-mgtb-10">
-					<input v-model="login.password" placeholder="请输入登录密码" class="is-input1"  @input="BindInput" data-val="password"/>
+					<input type="password" v-model="login.password" placeholder="请输入登录密码" class="is-input1"  @input="BindInput" data-val="password"/>
 				</view>
 
 				<view class=" loginbtn has-radius has-mgtb-20">
@@ -24,37 +24,74 @@
 				<text>忘记密码？</text>
 				<text class="is-blue">点击找回</text>
 			</navigator>
-			<navigator url="register" class=" has-radius is-right is-grey has-mgr-20" hover-class="" @tap="goRegister">
-				<text class="is-blue" style="margin-left: 10rpx;">
-					注册
-				</text>
-			</navigator>
+		</view>
+		<view style="text-align: center;">
+			<text class="is-blue" @tap="goRegister">
+				还没有账号 免费注册
+			</text>
 		</view>
 	</view>
 </template>
 
 <script>
+	import {
+		PostRequest,
+		GetRequest
+	} from '@/common/js/util.js';
+	// import CryptoJS from '@/components/'
+	var CryptoJS = require("crypto-js");
 	export default {
 		data() {
 			return {
 				login: {
 					loading: false,
-					phone:"",
-					password:""
+					phone:"13245445433",
+					password:"000000"
 				},
 
 			};
 		},
 		methods:{
-			defaultHandlerLogin:function(){
+			defaultHandlerLogin:function(e){
 				this.login.loading = true;
-				setTimeout((e=>{
-					this.login.loading = false;
-					uni.reLaunch({
-						url:"../tag/tag"
-					})
-				}),1500);
-				console.log(JSON.stringify(this.login)); 
+				var pwd = this.login.password;
+				var phone = this.login.phone;
+				console.log("得到账号:", this.login)
+				GetRequest("/agent/timenow", {a: 1, b: 2}, (tdata, succeed)=>{
+					if(succeed){
+						var md5pwd = CryptoJS.MD5(pwd+tdata.data).toString(CryptoJS.enc.Hex);
+						var params = {
+							username: phone,
+							userpass: md5pwd,
+							sujistr:tdata.data
+						}
+						PostRequest("/agent/md5login", params, (data, succeed)=>{
+							if(succeed){								
+								setTimeout((e=>{
+									this.login.loading = false;
+									uni.setStorage({
+										key:"login_info",
+										data: {
+											uid: data.uid,
+											token: data.token
+										},
+										success: () => {
+											uni.reLaunch({
+												url:"../tag/tag"
+											})
+										}
+									})
+								}),500);
+							}else{
+								setTimeout((e=>{
+									this.login.loading = false;
+								}),500);
+							}
+						})
+					}
+				})
+				
+				// console.log(JSON.stringify(this.login)); 
 			},
 			BindInput:function(e){
 				var dataval = e.currentTarget.dataset.val;

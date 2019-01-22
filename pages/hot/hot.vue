@@ -1,7 +1,52 @@
 <template>
 	<view class="index">
-		
-		<text class="loadMore">我是购物车</text>
+		<view style="margin-bottom: 100upx;">
+			<view style="flex:1; width: 100%;" v-for="(item, i) in data" :key="i">
+				<view class="item-content">
+					<view class="item-cherckbox">
+						<checkbox value="USA" @tap="onCheckbox(item.id, item.original_price)"></checkbox>
+					</view>
+					<view class="item-img" style="border-style: solid;border-width: 1px; border-color: #EFEFEF;">
+						<image style="width: 160upx; height: 160upx;" :src="item.img"></image>
+					</view>
+					<view class="item-text" style="font-size: 25upx;">
+						<view>
+							<text>{{item.name}}</text>
+						</view>
+						<view style="margin-top: 35upx">
+							<text style="color: #8F8F94;">颜色：{{item.color}} &nbsp;&nbsp;&nbsp;包装：{{item.pack}}</text>
+						</view>
+						<view style="margin-top: 35upx">
+							<text style="font-weight: 900;">
+								￥{{item.original_price}}
+							</text>
+							<text style="color: #8F8F94; margin-left: 10upx; text-decoration: line-through;">
+								￥{{item.discount_price}}
+							</text>
+							<text style="margin-left: 250upx;">
+								{{item.number}}
+							</text>
+						</view>
+					</view>
+				</view>
+				<view :style="i == (data.length-1) ? {'display':'none'} : {flex:1, height: '1px', width: '100%', backgroundColor: '#EFEFEF'}"/>
+			</view>
+		</view>
+		<view class="pay">
+			<view class="pay-opt">
+				<view style="width: 80%; text-align: right; margin-right: 20upx; font-size: 30upx;">
+					<text style="font-size: 28upx; color: #666666;">实付款：</text>
+					<text style="font-weight: 900;">￥{{sum_price}}</text>
+				</view>
+				<view style="width: 20%;">
+					<button class="bt_button" type="primary" 
+					style="background-color: #F03726; width: 100%;"
+					@tap="onShopping">
+						结算
+					</button>
+				</view>
+			</view>
+		</view>
 	</view>
 </template>
 
@@ -9,140 +54,123 @@
 	export default {
 		data() {
 			return {
-				refreshing: false,
-				lists: [],
-				fetchPageNum: 1
+				sum_price: 0.00,
+				data: [
+					{
+						id:1,
+						img: "../../static/shopping/kouhong_12cnml.jpg",
+						name: "美康粉黛醉美唇膏 持久保湿滋润防水不掉色",
+						color: "12#南玛瑙",
+						pack: "裸装",
+						number: 3,
+						original_price: 80.98,
+						discount_price: 120.98
+					},
+					{
+						id:2,
+						img: "../../static/shopping/kouhong_12cnml.jpg",
+						name: "美康粉黛醉美唇膏 持久保湿滋润防水不掉色",
+						color: "12#南玛瑙",
+						pack: "裸装",
+						number: 3,
+						original_price: 80.98,
+						discount_price: 120.98
+					},
+					{
+						id:3,
+						img: "../../static/shopping/kouhong_12cnml.jpg",
+						name: "美康粉黛醉美唇膏 持久保湿滋润防水不掉色",
+						color: "12#南玛瑙",
+						pack: "裸装",
+						number: 3,
+						original_price: 80.98,
+						discount_price: 120.98
+					},
+					{
+						id:4,
+						img: "../../static/shopping/kouhong_12cnml.jpg",
+						name: "美康粉黛醉美唇膏 持久保湿滋润防水不掉色",
+						color: "12#南玛瑙",
+						pack: "裸装",
+						number: 3,
+						original_price: 80.98,
+						discount_price: 120.98
+					},
+					{
+						id:5,
+						img: "../../static/shopping/kouhong_12cnml.jpg",
+						name: "美康粉黛醉美唇膏 持久保湿滋润防水不掉色",
+						color: "12#南玛瑙",
+						pack: "裸装",
+						number: 3,
+						original_price: 80.98,
+						discount_price: 120.98
+					}
+				]
 			}
 		},
 		onLoad() {
-			this.getData();
-			uni.getProvider({
-				service: "share",
-				success: (e) => {
-					let data = [];
-					for (let i = 0; i < e.provider.length; i++) {
-						switch (e.provider[i]) {
-							case 'weixin':
-								data.push({
-									name: '分享到微信好友',
-									id: 'weixin'
-								})
-								data.push({
-									name: '分享到微信朋友圈',
-									id: 'weixin',
-									type: 'WXSenceTimeline'
-								})
-								break;
-							case 'qq':
-								data.push({
-									name: '分享到QQ',
-									id: 'qq'
-								})
-								break;
-							default:
-								break;
-						}
-					}
-					this.providerList = data;
-				},
-				fail: (e) => {
-					console.log("获取登录通道失败", e);
-				}
-			});
 		},
 		onPullDownRefresh() {
-			console.log("下拉刷新");
-			this.refreshing = true;
-			this.getData();
 		},
 		onReachBottom() {
-			this.getData();
 		},
 		methods: {
-			getData() {
-				uni.request({
-					url: this.$serverUrl + '/api/picture/posts.php?page=' + (this.refreshing ? 1 : this.fetchPageNum) + '&per_page=10',
-					success: (ret) => {
-						if (ret.statusCode !== 200) {
-							console.log("请求失败:", ret)
-						} else {
-							if (this.refreshing && ret.data[0].id === this.lists[0][0].id) {
-								uni.showToast({
-									title: "已经最新",
-									icon: "none",
-								})
-								this.refreshing = false;
-								uni.stopPullDownRefresh()
-								return;
-							}
-							let list = [],
-								lists = [],
-								data = ret.data;
-							for (let i = 0, length = data.length; i < length; i++) {
-								let index = Math.floor(i / 2);
-								list.push(data[i]);
-								if (i % 2 == 1) {
-									lists.push(list);
-									list = [];
-								}
-							}
-							console.log("得到lists", lists);
-							if (this.refreshing) {
-								this.refreshing = false;
-								uni.stopPullDownRefresh()
-								this.lists = lists;
-								this.fetchPageNum = 2;
-							} else {
-								this.lists = this.lists.concat(lists);
-								this.fetchPageNum += 1;
-							}
-						}
-					}
-				});
-			},
-			goDetail(e) {
-				uni.navigateTo({
-					url:"../detail/detail?data=" + encodeURIComponent(JSON.stringify(e))
-				})
-			},
-			share(e) {
-				if (this.providerList.length === 0) {
-					uni.showModal({
-						title: "当前环境无分享渠道!",
-						showCancel: false
-					})
-					return;
-				}
-				let itemList = this.providerList.map(function (value) {
-					return value.name
-				})
-				uni.showActionSheet({
-					itemList: itemList,
-					success: (res) => {
-						uni.share({
-							provider: this.providerList[res.tapIndex].id,
-							scene: this.providerList[res.tapIndex].type && this.providerList[res.tapIndex].type === 'WXSenceTimeline' ? 'WXSenceTimeline' : "WXSceneSession",
-							type: 0,
-							title:"uni-app模版",
-							summary: e.title,
-							imageUrl:e.img_src,
-							href:"https://uniapp.dcloud.io",
-							success: (res) => {
-								console.log("success:" + JSON.stringify(res));
-							},
-							fail: (e) => {
-								uni.showModal({
-									content: e.errMsg,
-									showCancel:false
-								})
-							}
-						});
-					}
-				})
+			onCheckbox(id, original_price){
+				var sum_price = this.sum_price;
+				sum_price += original_price;
+				this.sum_price = Math.floor(sum_price * 100) / 100;
 			}
 		}
 	}
 </script>
 
 <style>
+	.item-content {
+		flex:1;
+		display: flex;
+		margin-top: 40upx;
+		margin-bottom:20upx;
+		/* flex-direction: column; */
+		/* justify-content: center; */
+	}
+	.item-text {
+		margin-left: 10upx;
+	}
+	.item-cherckbox {
+		margin-left: 15upx;
+	}
+	.item-img {
+		margin-left: 3upx;
+	}
+	.pay {
+		position: fixed;
+		bottom: 0px;
+		right: 0px;
+		font-size: 25upx;
+		z-index: 10000;
+		width: 100%;
+		/*  */
+		height:80upx;
+		background: #fff;
+		border-style: solid;
+		border-width: 1px 0px 0px; 
+		border-color: #EFEFEF;
+	}
+	
+	.pay-opt {
+		display: flex;
+		text-align: center;
+		align-items:center;
+		justify-content:center;
+	}
+	
+	.bt_button {
+		border-radius:0px;
+		position: inherit;
+	}
+	.bt_button:after {
+		width: 0;
+		height: 0;
+	}
 </style>

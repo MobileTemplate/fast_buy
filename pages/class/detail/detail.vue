@@ -160,6 +160,7 @@
 </script>
 
 <style lang="scss">
+	
 	.uni-tab-bar {
 		display: flex;
 		flex: 1;
@@ -218,6 +219,10 @@
 		border-radius:0px;
 		position: inherit;
 	}
+	.bt_button:after {
+		width: 0;
+		height: 0;
+	}
 	
 	.uni-tag {
 		margin: 5px;
@@ -228,4 +233,6 @@
 		padding: 0 7px;
 		height: 21px;
 	}
+	
+	
 </style>

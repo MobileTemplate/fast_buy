@@ -66,7 +66,7 @@
 				this.loading = true;
 				setTimeout((e=>{
 					this.loading = false;
-					uni.reLaunch({
+					uni.redirectTo({
 						url:"login"
 					})
 				}),1500);

@@ -56,7 +56,6 @@
 					group.push(groupItem)
 				}
 				groupItem = null
-				console.log(group)
 				return group
 			},
 			setBorderClass() {

@@ -1,9 +1,9 @@
 <template>
 	<view style="background-color: #FFFFFF; width: 100%;">
-		<swiper style="width: 100%;" :indicator-dots="true" :autoplay="true" :interval="interval" 
+		<swiper style="width: 100%; height: 490upx;" :indicator-dots="true" :autoplay="true" :interval="interval" 
 		:duration="duration" :circular="true">
 			<swiper-item v-for="(item, i) in lb_data" :key="i">
-				<image style="width: 100%; height:100%;" class="lb-img" :src="item.img"></image>
+				<image style="width: 100%;" class="lb-img" :src="item.img"></image>
 			</swiper-item>
 		</swiper>
 		<view style="width: 100%; text-align: center; margin-top: 10upx;">
@@ -84,18 +84,13 @@
 		</view>
 		
 		<view :style="tabIndex!=1 && {'display':'none'}">
-			<uni-card is-full="false" title="产品参数">
+			<uni-card style="color: #E4393C; font-weight: 700;" is-full="false" title="买家印象">
 				<view style="font-size: 26upx;">
-					<view>产品类型: 烘炒类</view>
-					<view>原料产地: 巴基斯坦</view>
-					<view>产地: 湖北省武汉市</view>
-					<view>配料表: 进口松子、食用盐</view>
-					<view>产品规格: 210g</view>
-					<view>保质期: 180天</view>
-					<view>产品标准号: GB/T 22165</view>
-					<view>生产许可证编号：QS4201 1801 0226</view>
-					<view>储存方法： 请放置于常温、阴凉、通风、干燥处保存 </view>
-					<view>食用方法： 开袋去壳即食</view>
+					<uni-tag class="uni-tag" text="味道不错(2177)" type="warning"></uni-tag>
+					<uni-tag class="uni-tag" text="颗粒饱满(1860)" type="warning"></uni-tag>
+					<uni-tag class="uni-tag" text="口感好(1290)" type="warning"></uni-tag>
+					<uni-tag class="uni-tag" text="商品不错(1689)" type="warning"></uni-tag>
+					<uni-tag class="uni-tag" text="香脆可口(234)" type="warning"></uni-tag>
 				</view>
 			</uni-card>
 			<view class="uni-tab-bar">
@@ -168,6 +163,30 @@
 			    </view>
 			</view>
 		</view>
+		<view class="pay">
+			<view class="pay-opt">
+				<view style="width: 12%;" @tap="onHome">
+					<text>首页</text>
+				</view>
+				<view style="width: 12%" @tap="onCollect">
+					<text>收藏</text>
+				</view>
+				<view style="width: 38%;">
+					<button class="bt_button" type="primary" 
+					style="background-color: #FFEDED; color: #F03726; width: 100%;"
+					@tap="onBuy">
+						立即购买
+					</button>
+				</view>
+				<view style="width: 38%;">
+					<button class="bt_button" type="primary" 
+					style="background-color: #F03726; width: 95%; margin-right: 5%;"
+					@tap="onShopping">
+						加入购物车
+					</button>
+				</view>
+			</view>
+		</view>
 	</view>
 </template>
 
@@ -176,7 +195,6 @@
 	import uniList from "@/components/uni-list/uni-list.vue";
 	import uniListItem from "@/components/uni-list-item/uni-list-item.vue";
 	import uniCard from "@/components/uni-card/uni-card.vue";
-	// import evaluate from "@/pages/ev"
 	
 	const FAIL_CONTENT = '<p>获取信息失败</p>';
 	export default {
@@ -190,13 +208,13 @@
 			return {
 				lb_data: [
 					{
-						img: "../../../static/home/shuffling_1.jpg"
+						img: "../../../static/shop/01.jpg"
 					},
 					{
-						img: "../../../static/home/shuffling_2.jpg"
+						img: "../../../static/shop/02.jpg"
 					},
 					{
-						img: "../../../static/home/shuffling_3.jpg"
+						img: "../../../static/shop/03.jpg"
 					}
 				],
 				interval: 5000,
@@ -223,6 +241,18 @@
 			tapTab(index){
 				this.tabIndex = index;
 				console.log(index);
+			},
+			onHome(){
+				console.log("首页");
+			},
+			onCollect(){
+				console.log("收藏");
+			},
+			onBuy(){
+				console.log("立即购买");
+			},
+			onShopping(){
+				console.log("加入购物车");
 			}
 		}
 	}
@@ -327,6 +357,7 @@
 			}
 		}
 	}
+	
 	.uni-tab-bar {
 		display: flex;
 		flex: 1;
@@ -448,5 +479,39 @@
 	    border-radius: 30upx;
 	    color: #333 !important;
 	    margin: 0 10upx;
+	}
+	
+	.pay {
+		position: fixed;
+		bottom: 0px;
+		right: 0px;
+		z-index: 10000;
+		width: 100%;
+		height:100upx;
+		background: #fff;
+		box-shadow:0px -1px 20px #888;
+	}
+	
+	.pay-opt {
+		margin-top: 10upx;
+		display: flex;
+		text-align: center;
+		align-items:center;
+		justify-content:center;
+	}
+	
+	.bt_button {
+		border-radius:0px;
+		position: inherit;
+	}
+	
+	.uni-tag {
+		margin: 5px;
+		border: 0px;
+		font-weight: 100;
+		background: #f47602;
+		line-height: 21px;
+		padding: 0 7px;
+		height: 21px;
 	}
 </style>

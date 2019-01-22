@@ -115,15 +115,13 @@
 						})
 					}
 				})
-				
-				// console.log(JSON.stringify(this.login)); 
 			},
 			BindInput:function(e){
 				var dataval = e.currentTarget.dataset.val;
 				this.login[dataval] = e.detail.value; 
 			},
 			goRegister:function(){
-				uni.reLaunch({
+				uni.redirectTo({
 					url:"register"
 				})
 			}

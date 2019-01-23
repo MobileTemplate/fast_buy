@@ -4,7 +4,9 @@
 			<view style="flex:1; width: 100%;" v-for="(item, i) in data" :key="i">
 				<view class="item-content">
 					<view class="item-cherckbox">
-						<checkbox value="USA" @tap="onCheckbox(item.id, item.original_price)"></checkbox>
+						<checkbox-group @change="(e)=>{onCheckbox(e, item.id, item.original_price)}">
+							<checkbox :value="item.id"></checkbox>
+						</checkbox-group>
 					</view>
 					<view class="item-img" style="border-style: solid;border-width: 1px; border-color: #EFEFEF;">
 						<image style="width: 160upx; height: 160upx;" :src="item.img"></image>
@@ -116,10 +118,17 @@
 		onReachBottom() {
 		},
 		methods: {
-			onCheckbox(id, original_price){
-				var sum_price = this.sum_price;
-				sum_price += original_price;
-				this.sum_price = Math.floor(sum_price * 100) / 100;
+			onCheckbox(e, id, price){
+				if(e != null && e.detail != null && e.detail.value != null){
+					// console.log(this);
+					var sum_price = this.sum_price;
+					if(e.detail.value.length > 0){
+						sum_price += price;
+					}else{
+						sum_price -= price;
+					}
+					this.sum_price = Math.floor(sum_price * 100) / 100;
+				}
 			}
 		}
 	}

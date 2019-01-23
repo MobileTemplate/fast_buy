@@ -127,7 +127,23 @@
                 "navigationBarTitleText" : "",
                 "enablePullDownRefresh" : false
             }
-        }
+        },
+		{
+			"path":"pages/userinfo/account-set",
+			"style": {
+				"navigationBarTitleText" : "账户设置",
+				"navigationBarBackgroundColor": "#FFFFFF",
+				"navigationBarTextStyle": "black"
+			}
+		},
+		{
+			"path":"pages/address/manage",
+			"style": {
+				"navigationBarTitleText" : "地址管理",
+				"navigationBarBackgroundColor": "#FFFFFF",
+				"navigationBarTextStyle": "black"
+			}
+		}
     ],
     "globalStyle" : {
         "navigationBarTextStyle" : "white",

@@ -120,14 +120,13 @@
 		methods: {
 			onCheckbox(e, id, price){
 				if(e != null && e.detail != null && e.detail.value != null){
-					// console.log(this);
 					var sum_price = this.sum_price;
 					if(e.detail.value.length > 0){
 						sum_price += price;
 					}else{
 						sum_price -= price;
 					}
-					this.sum_price = Math.floor(sum_price * 100) / 100;
+					this.sum_price = Number(sum_price.toFixed(2));
 				}
 			}
 		}

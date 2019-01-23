@@ -10,7 +10,7 @@
 					<view class="integral">积分:{{userinfo.integral}}</view>
 				</view>
 			</view>
-			<view class="setting">
+			<view class="setting" @tap="onSetting">
 				<image src="../../static/userinfo/setting.png"></image>
 			</view>
 		</view>
@@ -101,6 +101,11 @@
 						}
 					})
 				}
+			},
+			onSetting(){
+				uni.navigateTo({
+					url:"./account-set"
+				})
 			}
 		}
 	}

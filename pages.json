@@ -131,9 +131,7 @@
 		{
 			"path":"pages/userinfo/account-set",
 			"style": {
-				"navigationBarTitleText" : "账户设置",
-				"navigationBarBackgroundColor": "#FFFFFF",
-				"navigationBarTextStyle": "black"
+				"navigationBarTitleText" : "账户设置"
 			}
 		},
 		{

@@ -1,16 +1,16 @@
 <template>
 	<view style="width: 100%;">
-		<view class="header" v-bind:class="{'status':isH5Plus}">
+		<view class="header" v-bind:class="{'status':isH5Plus}" @tap="onSetting">
 			<view class="userinfo">
 				<view class="face">
 					<image :src="userinfo.face"></image>
 				</view>
 				<view class="info">
 					<view class="username">{{userinfo.username}}</view>
-					<view class="integral">积分:{{userinfo.integral}}</view>
+					<view class="integral">用户名: {{userinfo.username}}</view>
 				</view>
 			</view>
-			<view class="setting" @tap="onSetting">
+			<view class="setting" >
 				<image src="../../static/userinfo/setting.png"></image>
 			</view>
 		</view>
@@ -37,6 +37,9 @@
 	</view>
 </template>
 <script>
+	import {
+		GetUIDRequest
+	} from '@/common/js/util.js';
 	export default {
 		data() {
 			return {
@@ -52,22 +55,7 @@
 					{name:'待评价',icon:'l4.png',badge:9},
 					{name:'退换货',icon:'l5.png',badge:0}
 				],
-				severList:[
-					[
-						{name:'我的收藏',icon:'point.png'},
-						{name:'优惠券',icon:'quan.png'},
-						{name:'红包',icon:'momey.png'},
-						{name:'任务',icon:'renw.png'},
-					],
-					[
-						{name:'积分明细',icon:'mingxi.png'},
-						{name:'抽奖',icon:'choujiang.png'},
-						{name:'收货地址',icon:'addr.png'},
-						{name:'银行卡',icon:'bank.png'},
-						{name:'安全中心',icon:'security.png'},
-						{name:'在线客服',icon:'kefu.png'}
-					]
-				],
+				severList:[],
 			};
 		},
 		onLoad() {
@@ -76,12 +64,22 @@
 		},
 		methods: {
 			init() {
-				//用户信息
-				this.userinfo={
-					face:'../../static/userinfo/face.jpeg',
-					username:"VIP会员10240",
-					integral:"10240"
-				}		
+				const self = this;
+				GetUIDRequest('/info', null, (data)=>{
+					if(data.state==1){
+						//用户信息
+						self.userinfo={
+							face:data.data.icon,
+							username:data.data.nick_name,
+							integral:data.data.uid
+						}
+					} else {
+						uni.showToast({
+							title: data.data,
+							icon: "none"
+						});
+					}
+				});
 			},
 			//用户点击订单类型
 			toOrderType(index){
@@ -90,17 +88,6 @@
 			//用户点击列表项
 			toPage(list_i,li_i){
 				uni.showToast({title: this.severList[list_i][li_i].name});
-				if(this.severList[list_i][li_i].name == "安全中心"){
-					uni.setStorage({
-						key:"login_info",
-						data: null,
-						success: () => {
-							uni.reLaunch({
-								url:"../ucenter/login"
-							})
-						}
-					})
-				}
 			},
 			onSetting(){
 				uni.navigateTo({

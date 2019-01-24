@@ -8,7 +8,7 @@
 		<view class="registercontent">
 			<view class="has-mglr-10 ">
 				<view class="has-mgtb-10 ">
-					<input type="number" maxlength="11" placeholder="请输入手机号" class="is-input1 " />
+					<input type="number" v-model="phone" maxlength="11" placeholder="请输入手机号" class="is-input1 " />
 				</view>
 				<view class="has-mgtb-10 ">
 					<input type="number" maxlength="6" placeholder="短信验证码" class="is-input1 " />
@@ -16,7 +16,7 @@
 				</view>
 
 				<view class="has-radius has-mgtb-10">
-					<input placeholder="请输入登录密码" :password="true" class="is-input1" />
+					<input placeholder="请输入登录密码" v-model="password" :password="true" class="is-input1" />
 
 				</view>
 				<view class="registerbtn has-radius has-mgtb-20" >
@@ -33,9 +33,17 @@
 </template>
 
 <script>
+	import {
+		PostRequest,
+		GetRequest,
+		SetToken
+	} from '@/common/js/util.js';
+	
 	export default {
 		data() {
 			return {
+				phone: "",
+				password: "",
 				smsbtn: {
 					text: '获取验证码',
 					status: false,
@@ -63,15 +71,56 @@
 				return false;
 			},
 			fhLogin: function(){
+				this.UserRegister(this.phone, this.password);
+			},
+			UserRegister:function(phone, pwd){
 				this.loading = true;
-				setTimeout((e=>{
-					this.loading = false;
-					uni.redirectTo({
-						url:"login"
-					})
-				}),1500);
-				
-			}
+				var params = {
+					phone: phone,
+					password: pwd
+				}
+				PostRequest("/users/register", params, (data, succeed)=>{
+					if(succeed){
+						setTimeout((e=>{
+							this.loading = false;
+							if(data.state == 1){
+								uni.setStorage({
+									key:"login_info",
+									data: {
+										uid: data.data.uid,
+										phone: data.data.phone,
+										token: data.data.token
+									},
+									success: () => {
+										SetToken(data.token);
+										uni.switchTab({
+											url:'../tag/tag'
+										});
+									}
+								})
+							}else{
+								uni.setStorage({
+									key:"login_info",
+									data: null
+								})
+								uni.showToast({
+									title: data.data,
+									icon: "none"
+								});
+							}
+						}),500);
+					}else{
+						setTimeout((e=>{
+							this.loading = false;
+							uni.showToast({
+								title: '网络连接有误',
+								icon: "none"
+							});
+									
+						}),500);
+					}
+				})
+			},
 		}
 	}
 </script>

@@ -62,15 +62,19 @@ function Request(url, data, method, callback) {
 		method: method,
 		success: (result) => {
 			if(result.statusCode == 200){
-				callback(result.data, true)
+				callback(result.data)
 			}else{
-				callback(result.data, false)
+				uni.showToast({
+					title: '网络连接有误',
+					icon: "none"
+				});
 			}
 		},
 		fail: (result) => {
-			if(callback){
-				callback(result, false)
-			}
+			uni.showToast({
+				title: '网络连接有误',
+				icon: "none"
+			});
 		}
 	})
 }
@@ -86,8 +90,25 @@ function PostRequest(url, data, callback){
 	Request(urlTokne(url), data, "POST", callback);
 }
 
+function GetUIDRequest(url, data, callback){
+	uni.getStorage({
+		key:"login_info",
+		success: function (res) {
+			console.log(res.data)
+			if(res.data != null && res.data.uid != null){
+				url = "/users/"+res.data.uid+url
+				Request(urlTokne(url), data, "GET", callback);
+			}
+		},
+		
+	});
+	
+}
+
+
 function urlTokne(url){
 	url = uri + url;
+	console.log(token)
 	if(token != null && token != ""){
 		url = url +"?token=" + token;
 	}
@@ -102,5 +123,6 @@ export {
 	friendlyDate,
 	GetRequest,
 	SetToken,
-	PostRequest
+	PostRequest,
+	GetUIDRequest
 }

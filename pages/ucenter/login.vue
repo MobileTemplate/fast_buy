@@ -58,7 +58,9 @@
 			uni.getStorage({
 				key:"login_info",
 				success: function (res) {
-					self.UserLogin(res.data.phone, "", res.data.token)
+					if(res.data != null && res.data.phone != null && res.data.token != null){
+						self.UserLogin(res.data.phone, "", res.data.token)
+					}
 				},
 				
 			});
@@ -77,46 +79,35 @@
 					password: pwd,
 					code: code
 				}
-				PostRequest("/users/login", params, (data, succeed)=>{
-					if(succeed){
-						setTimeout((e=>{
-							this.login.loading = false;
-							if(data.state == 1){
-								uni.setStorage({
-									key:"login_info",
-									data: {
-										uid: data.data.uid,
-										phone: data.data.phone,
-										token: data.data.token
-									},
-									success: () => {
-										SetToken(data.token);
-										uni.switchTab({
-											url:'../tag/tag'
-										});
-									}
-								})
-							}else{
-								uni.setStorage({
-									key:"login_info",
-									data: null
-								})
-								uni.showToast({
-									title: data.data,
-									icon: "none"
-								});
-							}
-						}),500);
-					}else{
-						setTimeout((e=>{
-							this.login.loading = false;
+				PostRequest("/users/login", params, (data)=>{
+					setTimeout((e=>{
+						this.login.loading = false;
+						if(data.state == 1){
+							uni.setStorage({
+								key:"login_info",
+								data: {
+									uid: data.data.uid,
+									phone: data.data.phone,
+									token: data.data.token
+								},
+								success: () => {
+									SetToken(data.data.token);
+									uni.switchTab({
+										url:'../tag/tag'
+									});
+								}
+							})
+						}else{
+							uni.setStorage({
+								key:"login_info",
+								data: null
+							})
 							uni.showToast({
-								title: '网络连接有误',
+								title: data.data,
 								icon: "none"
 							});
-									
-						}),500);
-					}
+						}
+					}),500);
 				})
 			},
 			
@@ -125,7 +116,7 @@
 				this.login[dataval] = e.detail.value; 
 			},
 			goRegister:function(){
-				uni.redirectTo({
+				uni.navigateTo({
 					url:"register"
 				})
 			}

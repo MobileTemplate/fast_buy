@@ -46,76 +46,80 @@
 			return {
 				login: {
 					loading: false,
-					phone:"13245445433",
-					password:"000000"
+					phone:"13223452345",
+					password:"123456"
 				},
 
 			};
 		},
 		onLoad() {
-			console.log("-----自动登陆")
 			const self = this;
 			this.login.loading = false;
 			uni.getStorage({
 				key:"login_info",
 				success: function (res) {
-					self.login.loading = true;
-					if(res != null && res.data != null && res.data.token != null) {
-						SetToken(res.data.token);
-						setTimeout((e=>{
-							self.login.loading = false;
-							uni.switchTab({
-								url:'../tag/tag'
-							});
-						}), 1500);
-					}else{
-						self.login.loading = false;
-					}
+					self.UserLogin(res.data.phone, "", res.data.token)
 				},
 				
 			});
 		},
 		methods:{
 			defaultHandlerLogin:function(e){
-				this.login.loading = true;
 				var pwd = this.login.password;
 				var phone = this.login.phone;
-				console.log("得到账号:", this.login)
-				GetRequest("/agent/timenow", null, (tdata, succeed)=>{
+				this.UserLogin(phone, pwd, "")
+			},
+			
+			UserLogin:function(phone, pwd, code){
+				this.login.loading = true;
+				var params = {
+					phone: phone,
+					password: pwd,
+					code: code
+				}
+				PostRequest("/users/login", params, (data, succeed)=>{
 					if(succeed){
-						var md5pwd = CryptoJS.MD5(pwd+tdata.data).toString(CryptoJS.enc.Hex);
-						var params = {
-							username: phone,
-							userpass: md5pwd,
-							sujistr:tdata.data
-						}
-						PostRequest("/agent/md5login", params, (data, succeed)=>{
-							if(succeed){								
-								setTimeout((e=>{
-									this.login.loading = false;
-									uni.setStorage({
-										key:"login_info",
-										data: {
-											uid: data.uid,
-											token: data.token
-										},
-										success: () => {
-											SetToken(data.token);
-											uni.switchTab({
-												url:'../tag/tag'
-											});
-										}
-									})
-								}),500);
+						setTimeout((e=>{
+							this.login.loading = false;
+							if(data.state == 1){
+								uni.setStorage({
+									key:"login_info",
+									data: {
+										uid: data.data.uid,
+										phone: data.data.phone,
+										token: data.data.token
+									},
+									success: () => {
+										SetToken(data.token);
+										uni.switchTab({
+											url:'../tag/tag'
+										});
+									}
+								})
 							}else{
-								setTimeout((e=>{
-									this.login.loading = false;
-								}),500);
+								uni.setStorage({
+									key:"login_info",
+									data: null
+								})
+								uni.showToast({
+									title: data.data,
+									icon: "none"
+								});
 							}
-						})
+						}),500);
+					}else{
+						setTimeout((e=>{
+							this.login.loading = false;
+							uni.showToast({
+								title: '网络连接有误',
+								icon: "none"
+							});
+									
+						}),500);
 					}
 				})
 			},
+			
 			BindInput:function(e){
 				var dataval = e.currentTarget.dataset.val;
 				this.login[dataval] = e.detail.value; 

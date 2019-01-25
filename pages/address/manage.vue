@@ -2,7 +2,7 @@
 	<view style="width: 100%;">
 		<view style="width: 100%;">
 			<view class="list" v-for="(list, list_i) in severList" wx:key="list">
-				<view class="li" v-for="(li, li_i) in list" @tap="toPage(list_i,li_i)" v-bind:class="{'noborder':li_i==list.length-1}"  hover-class="hover"  hover-stay-time="50"  wx:key="li.name" >
+				<view class="li" v-for="(li, li_i) in list" @tap="toPage(list_i,li_i)" v-bind:class="{'noborder':li_i==list.length-1}" hover-class="hover" wx:key="li.name">
 					<view class="uaddinfo">
 						<view class="uinfo">
 							<view class="uinfo-uname">

@@ -1,6 +1,6 @@
 <template>
 	<view style="width: 100%;">
-		<view class="header" v-bind:class="{'status':isH5Plus}">
+		<view class="header" v-bind:class="{'status':true}">
 			<view class="userinfo">
 				<view class="face">
 					<image :src="userinfo.face"></image>
@@ -15,7 +15,10 @@
 			</view>
 		</view>
 		<view class="list" v-for="(list,list_i) in severList" wx:key="list">
-			<view class="li" v-for="(li,li_i) in list" @tap="toPage(list_i,li_i)" v-bind:class="{'noborder':li_i==list.length-1}"  hover-class="hover"  hover-stay-time="50"  wx:key="li.name" >
+			<view class="li" v-for="(li,li_i) in list" 
+			@tap="toPage(list_i,li_i)" 
+			v-bind:class="{'noborder':li_i==list.length-1}" 
+			hover-class="hover" wx:key="li.name" >
 				<view class="text">{{li.name}}</view>
 				<image class="to" src="../../static/userinfo/to.png"></image>
 			</view>
@@ -62,19 +65,21 @@
 		methods: {
 			init() {
 				const self = this;
-				GetUIDRequest('/info', null, (data)=>{
-					if(data.state==1){
-						//用户信息
-						self.userinfo={
-							face:data.data.icon,
-							username:data.data.nick_name,
-							integral:data.data.uid
+				GetUIDRequest('/info', null, (data, succeed)=>{
+					if(succeed){
+						if(data.state==1){
+							//用户信息
+							self.userinfo={
+								face:data.data.icon,
+								username:data.data.nick_name,
+								integral:data.data.uid
+							}
+						} else {
+							uni.showToast({
+								title: data.data,
+								icon: "none"
+							});
 						}
-					} else {
-						uni.showToast({
-							title: data.data,
-							icon: "none"
-						});
 					}
 				});
 			},

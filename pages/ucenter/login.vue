@@ -79,7 +79,14 @@
 					password: pwd,
 					code: code
 				}
-				PostRequest("/users/login", params, (data)=>{
+				PostRequest("/users/login", params, (data, success)=>{
+					if(!success){
+						uni.setStorage({
+							key:"login_info",
+							data: null
+						})
+						return
+					}
 					setTimeout((e=>{
 						this.login.loading = false;
 						if(data.state == 1){
@@ -88,7 +95,7 @@
 								data: {
 									uid: data.data.uid,
 									phone: data.data.phone,
-									token: data.data.token
+									token: data.data.token+"1"
 								},
 								success: () => {
 									SetToken(data.data.token);

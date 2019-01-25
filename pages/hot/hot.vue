@@ -5,7 +5,7 @@
 				<view class="item-content">
 					<view class="item-cherckbox">
 						<checkbox-group @change="(e)=>{onCheckbox(e, item.id, item.original_price)}">
-							<checkbox :value="item.id"></checkbox>
+							<checkbox :value="item.id.toString()"></checkbox>
 						</checkbox-group>
 					</view>
 					<view class="item-img" style="border-style: solid;border-width: 1px; border-color: #EFEFEF;">
@@ -34,7 +34,7 @@
 				<view :style="i == (data.length-1) ? {'display':'none'} : {flex:1, height: '1px', width: '100%', backgroundColor: '#EFEFEF'}"/>
 			</view>
 		</view>
-		<view class="pay">
+		<view class="pay" :style="paystyle">
 			<view class="pay-opt">
 				<view style="width: 80%; text-align: right; margin-right: 20upx; font-size: 30upx;">
 					<text style="font-size: 28upx; color: #666666;">实付款：</text>
@@ -108,10 +108,16 @@
 						original_price: 80.98,
 						discount_price: 120.98
 					}
-				]
+				],
+				paystyle: {}
 			}
 		},
 		onLoad() {
+			//#ifdef H5
+			this.paystyle = {
+				'marginBottom': '50px'
+			}
+			//#endif
 		},
 		onPullDownRefresh() {
 		},
@@ -158,7 +164,6 @@
 		font-size: 25upx;
 		z-index: 10000;
 		width: 100%;
-		/*  */
 		height:80upx;
 		background: #fff;
 		border-style: solid;

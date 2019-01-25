@@ -79,7 +79,7 @@
 					phone: phone,
 					password: pwd
 				}
-				PostRequest("/users/register", params, (data, succeed)=>{
+				PostRequest("/users/register", params, (data, success)=>{
 					if(succeed){
 						setTimeout((e=>{
 							this.loading = false;
@@ -112,11 +112,6 @@
 					}else{
 						setTimeout((e=>{
 							this.loading = false;
-							uni.showToast({
-								title: '网络连接有误',
-								icon: "none"
-							});
-									
 						}),500);
 					}
 				})

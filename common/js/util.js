@@ -1,5 +1,5 @@
 var token = "";
-var uri = "http://localhost:8006";
+var uri = "http://139.224.239.128:8006";
 
 function friendlyDate(timestamp) {
 	var formats = {
@@ -62,8 +62,9 @@ function Request(url, data, method, callback) {
 		method: method,
 		success: (result) => {
 			if(result.statusCode == 200){
-				callback(result.data)
+				callback(result.data, true)
 			}else{
+				callback(result.data, false)
 				uni.showToast({
 					title: '网络连接有误',
 					icon: "none"
@@ -71,6 +72,7 @@ function Request(url, data, method, callback) {
 			}
 		},
 		fail: (result) => {
+			callback(result.data, false)
 			uni.showToast({
 				title: '网络连接有误',
 				icon: "none"

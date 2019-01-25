@@ -1,6 +1,6 @@
 <template>
 	<view style="width: 100%;">
-		<view class="header" v-bind:class="{'status':isH5Plus}" @tap="onSetting">
+		<view class="header" v-bind:class="{'status':true}" @tap="onSetting">
 			<view class="userinfo">
 				<view class="face">
 					<image :src="userinfo.face"></image>
@@ -16,16 +16,18 @@
 		</view>
 		<view class="orders">
 			<view class="box">
-				<view class="label" v-for="(row,index) in orderTypeLise" wx:key="row.name" hover-class="hover" hover-stay-time="50" @tap="toOrderType(index)">
+				<view class="label" v-for="(row,index) in orderTypeLise" 
+					wx:key="row.name" hover-class="hover" @tap="toOrderType(index)">
 					<view class="icon">
-						<view class="badge" v-if="row.badge>0">{{row.badge}}</view>
+						
 						<image :src="'../../static/userinfo/'+row.icon"></image>
+						<view class="badge" v-if="row.badge>0">{{row.badge}}</view>
 					</view>
 					{{row.name}}
 				</view>
 			</view>
 		</view> 
-		<view class="list" v-for="(list,list_i) in severList" wx:key="list">
+		<!-- <view class="list" v-for="(list,list_i) in severList" wx:key="list">
 			<view class="li" v-for="(li,li_i) in list" @tap="toPage(list_i,li_i)" v-bind:class="{'noborder':li_i==list.length-1}"  hover-class="hover"  hover-stay-time="50"  wx:key="li.name" >
 				<view class="icon">
 					<image :src="'../../static/userinfo/sever/'+li.icon"></image>
@@ -33,7 +35,7 @@
 				<view class="text">{{li.name}}</view>
 				<image class="to" src="../../static/userinfo/to.png"></image>
 			</view>
-		</view>
+		</view> -->
 	</view>
 </template>
 <script>
@@ -65,19 +67,21 @@
 		methods: {
 			init() {
 				const self = this;
-				GetUIDRequest('/info', null, (data)=>{
-					if(data.state==1){
-						//用户信息
-						self.userinfo={
-							face:data.data.icon,
-							username:data.data.nick_name,
-							integral:data.data.uid
+				GetUIDRequest('/info', null, (data, succeed)=>{
+					if(succeed){
+						if(data.state == 1){
+							//用户信息
+							self.userinfo={
+								face:data.data.icon,
+								username:data.data.nick_name,
+								integral:data.data.uid
+							}
+						} else {
+							uni.showToast({
+								title: data.data,
+								icon: "none"
+							});
 						}
-					} else {
-						uni.showToast({
-							title: data.data,
-							icon: "none"
-						});
 					}
 				});
 			},

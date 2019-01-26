@@ -10,25 +10,29 @@
 				<view class=" has-mgtb-10 ">
 					<input type="number" maxlength="11" v-model="login.phone" placeholder="请输入手机号" class="is-input1 " @input="BindInput" data-val="phone" />
 				</view>
-				<view class=" has-radius has-mgtb-10">
+				<view class="has-radius has-mgtb-10">
 					<input type="password" v-model="login.password" placeholder="请输入登录密码" class="is-input1"  @input="BindInput" data-val="password"/>
 				</view>
 
-				<view class=" loginbtn has-radius has-mgtb-20">
+				<view class="loginbtn has-radius" style="margin-top:40rpx !important; margin-bottom:10rpx !important;">
 					<button :loading="login.loading" @tap="defaultHandlerLogin">{{ login.loading ? "登录中...":"登 录"}}</button>
 				</view>
 			</view>
 		</view>
-		<view class="is-20vh has-mgt-80 content">
-			<navigator url="#" class="has-radius is-right is-grey has-mgr-20" hover-class="">
-				<text>忘记密码？</text>
-				<text class="is-blue">点击找回</text>
-			</navigator>
+		<view style="width: 80%; margin: 0 auto; font-size: 25upx; flex: 1;display: flex;">
+			<view style="width: 50%;">
+				<text class="is-blue" style="text-align: right;" @tap="goCodeLogin">验证码登陆</text>
+			</view>
+			<view style="width: 50%; text-align: right;">
+				<text class="is-blue" @tap="goRegister">免费注册</text>
+			</view>
 		</view>
-		<view style="text-align: center;">
-			<text class="is-blue" @tap="goRegister">
-				还没有账号 免费注册
-			</text>
+		<view class="pay">
+			<view class="pay-opt">
+				<text style="color: #808080;" @tap="onForgetPwd">
+					忘记密码
+				</text>
+			</view>
 		</view>
 	</view>
 </template>
@@ -39,7 +43,7 @@
 		GetRequest,
 		SetToken
 	} from '@/common/js/util.js';
-	// import CryptoJS from '@/components/'
+	
 	var CryptoJS = require("crypto-js");
 	export default {
 		data() {
@@ -126,6 +130,12 @@
 				uni.navigateTo({
 					url:"register"
 				})
+			},
+			goCodeLogin:function(){
+				console.log("验证码登陆")
+			},
+			onForgetPwd:function(){
+				console.log("忘记密码")
 			}
 		}
 	}
@@ -187,5 +197,23 @@
 		font-family: inherit;
 		background: #fff;
 		resize: none;
+	}
+	
+	.pay {
+		position: fixed;
+		bottom: 0px;
+		right: 0px;
+		font-size: 25upx;
+		z-index: 10000;
+		width: 100%;
+		height:80upx;
+	}
+	
+	.pay-opt {
+		margin-top: 10upx;
+		display: flex;
+		text-align: center;
+		align-items:center;
+		justify-content:center;
 	}
 </style>

@@ -19,7 +19,6 @@
 				<view class="label" v-for="(row,index) in orderTypeLise" 
 					wx:key="row.name" hover-class="hover" @tap="toOrderType(index)">
 					<view class="icon">
-						
 						<image :src="'../../static/userinfo/'+row.icon"></image>
 						<view class="badge" v-if="row.badge>0">{{row.badge}}</view>
 					</view>
@@ -104,9 +103,6 @@
 
 <style lang="scss">
 .header{
-	&.status{
-		padding-top:var(--status-bar-height);
-	}
 	background-color:#FF80AB;
 	width:92%;
 	height:30vw;

@@ -983,7 +983,11 @@ a {
   height: 50vh; }
 
 .is-20vh {
-  height: 20vh; }
+	height: 20vh;
+}
+.is-20upx {
+	height: 20upx;
+}
 
 /*页面宽度*/
 .is-width-30 {

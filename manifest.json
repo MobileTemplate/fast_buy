@@ -1,7 +1,7 @@
 {
-    "name" : "快购",
-    "appid" : "__UNI__7F7B405",
-    "description" : "快购商城",
+    "name" : "中岭小店",
+    "appid" : "__UNI__9FA0AF1",
+    "description" : "一个网上购物商场",
     "transformPx" : false,
     "icons" : [
         {
@@ -52,7 +52,8 @@
                 }
             },
             "sdkConfigs" : {
-                "maps" : {}
+                "maps" : {},
+                "payment" : {}
             },
             "android" : {
                 "permissions" : [
@@ -71,7 +72,9 @@
             }
         },
         "modules" : {
-            "Maps" : {}
+            "Maps" : {},
+            "Push" : {},
+            "Payment" : {}
         }
     },
     // 5+App特有相关

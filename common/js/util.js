@@ -102,9 +102,7 @@ function GetUIDRequest(url, data, callback){
 				Request(urlTokne(url), data, "GET", callback);
 			}
 		},
-		
 	});
-	
 }
 
 

@@ -9,9 +9,9 @@
 					<view>产品规格: 210g</view>
 					<view>保质期: 180天</view>
 					<view>产品标准号: GB/T 22165</view>
-					<view>生产许可证编号：QS4201 1801 0226</view>
-					<view>储存方法： 请放置于常温、阴凉、通风、干燥处保存 </view>
-					<view>食用方法： 开袋去壳即食</view>
+					<view>生产许可证编号: QS4201 1801 0226</view>
+					<view>储存方法: 请放置于常温、阴凉、通风、干燥处保存 </view>
+					<view>食用方法: 开袋去壳即食</view>
 				</view>
 			</uni-card>
 			<uni-card is-full="false" title="产品详细">

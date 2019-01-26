@@ -108,9 +108,6 @@
 
 <style lang="scss">
 	.header {
-		&.status {
-			padding-top:var(--status-bar-height);
-		}
 		background-color:#FFFFFF;
 		width:96%;
 		height:150upx;
